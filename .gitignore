@@ -1,3 +1,6 @@
 
 # Ignore large video files for now
 *.mp4
+
+# Ignore zipped up code
+*.zip
