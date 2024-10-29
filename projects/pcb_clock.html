@@ -1,0 +1,606 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../main.css" />
+    <link rel="stylesheet" type="text/css" href="project_pages.css" />
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+        var blue_pressed = 0;
+        var green_pressed = 0;
+        var red_pressed = 0;
+
+        var redColor = 255;
+        var greenColor = 255;
+        var blueColor = 255;
+
+        var mouseY = 0;
+
+        var redPotLine;
+        var greenPotLine;
+        var bluePotLine;
+
+        function unPressButtons() {
+            if (red_pressed == 1) {
+                red_pressed = 0;
+            }
+            else if (green_pressed == 1) {
+                green_pressed = 0;
+            }
+            else if (blue_pressed == 1) {
+                blue_pressed = 0;
+            }
+        }
+
+        function mouseMoved(evt) {
+            mouseY = evt.clientY;
+        }
+
+        setInterval(function monitorMouse() {
+            var redtest = document.getElementById("redtest");
+            var greentest = document.getElementById("greentest");
+            var bluetest = document.getElementById("bluetest");
+
+            if (red_pressed == 1) {
+                redColor = 255 / 200 * mouseY;
+                redPot.setAttribute("transform", "rotate(" + 360 / 255 * redColor.toString() + " 902 72)");
+
+                //redtest.innerHTML = redColor.toString(); 
+            }
+            else if (green_pressed == 1) {
+                greenColor = 255 / 200 * mouseY;
+                greenPot.setAttribute("transform", "rotate(" + 360 / 255 * greenColor.toString() + " 982 72)");
+
+                //greentest.innerHTML = greenColor.toString(); 
+            }
+            else if (blue_pressed == 1) {
+                blueColor = 255 / 200 * mouseY;
+                bluePot.setAttribute("transform", "rotate(" + 360 / 255 * blueColor.toString() + " 1062 72)");
+
+                //bluetest.innerHTML = blueColor.toString(); 
+            }
+
+            document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+        }, 100);
+
+
+    </script>
+
+</head>
+
+
+<body>
+    <div id="page">
+        <div id="Banner">
+
+            <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+            <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+
+            <script>
+                var redPot;
+                var greenPot;
+                var BluePot;
+
+                var svgElm = document.getElementById("svg_circuit");
+                svgElm.addEventListener("load", function () {
+                    var svgDoc = svgElm.contentDocument;
+
+                    svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+                        mouseY = evt.clientY;
+                    }, false);
+
+                    svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+                        if (clickedOnce == 0) {
+                            if (red_pressed == 1) {
+                                red_pressed = 0;
+                            }
+                            if (green_pressed == 1) {
+                                green_pressed = 0;
+                            }
+                            if (blue_pressed == 1) {
+                                blue_pressed = 0;
+                            }
+                        }
+                        clickedOnce = 0;
+                    }, false);
+
+                    redPot = svgDoc.getElementById("red_pot");
+                    redPot.addEventListener("mousedown", function redPressed() {
+                        red_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    redPot.style.cursor = "pointer";
+
+                    greenPot = svgDoc.getElementById("green_pot");
+                    greenPot.addEventListener("mousedown", function greenPressed() {
+                        green_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    greenPot.style.cursor = "pointer";
+
+                    bluePot = svgDoc.getElementById("blue_pot");
+                    bluePot.addEventListener("mousedown", function bluePressed() {
+                        blue_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    bluePot.style.cursor = "pointer";
+
+
+                }, false);
+            </script>
+
+        </div>
+
+        <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+            <table class="navbar_table" cellspacing="0">
+                <tr>
+                    <td class="navbar_entry">
+                        <a href="../index.html">
+                            Home
+                        </a>
+                    </td>
+
+                    <td class="navbar_entry">
+                        <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+                            Projects
+                        </a>
+                        <ul>
+                            <li class="submenu_item">
+                                <a href="power_supply.html">Bench Power Supply</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="pcb_clock.html">PCB Alarm Clock</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="night_vision.html">Night Vision Goggles</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="desk.html">Motorized Desk</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="IR_recorder.html">IR Recorder</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="home_automation_v2.html">Home Automation V2</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="internet_robot.html">Internet Robot</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="N64_mod.html">N64 Mod</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="../projects.html">. . .</a>
+                            </li>
+                        </ul>
+                    </td>
+
+                    <td class="navbar_entry">
+                        <a href="../contact.html">
+                            Contact
+                        </a>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="main_content">
+            <h1 id="project_title">PCB Art Alarm Clock</h1>
+
+            <table>
+                <tr>
+                    <td class="text_td">
+                        <p class="section_title">Overview</p>
+                        <p class="section_text">
+                            For this project, I made an alarm clock for myself that uses a printed circuit board as the digital clock face. 
+                            I designed and made pretty much every component of this project from scratch, so it took me quite a while to complete. I'm pretty
+                            excited about how it turned out though. I designed the PCB, and actually developed and etched it myself. I also wrote all of the
+                            microcontroller code, and designed a custom enclosure that I had 3D printed.
+                            The clock has a mountain scene design etched into the metal of the PCB and uses RGB backlighting
+                            to illuminate it from behind with colorschemes based on the time of day. The PCB has no soldermask by design, 
+                            so that it's sort of transparent to allow both the light from the backlighting and the digital clock digits to shine through.
+                            It has alarm functionality with a built in speaker, and has a snooze button which is a very important feature for me :) 
+                            The next few sections will go over the build process in more detail if you're interested.
+
+                            <br/>
+                            <br/>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/6iXIwlZnXnY" frameborder="0" allow="autoplay; encrypted-media"
+                                allowfullscreen></iframe>
+                        </p>
+
+                        <p class="section_title">Clock Features and Overview</p>
+                        <p class="section_text">
+                            I came up with the idea for the basic idea for this project by noticing that light shines through some of the PCBs on my desk
+                            that don't have solder mask. I though it would be cool to make a PCB that had some kind of image etched into the metal
+                            and have light shine through it. A clock was something that I thought would look cool but also be useful. 
+                            I knew I wanted to have alarm functionality and RGB backlight as basic features for the clock. I didn't want to add 
+                            too many more things because it would quickly become a much bigger project than I intended. I also added circuitry
+                            for battery backup to the clock, but didn't end up implementing it in the end as it seemed kind of unecessary. 
+                            
+                        </p>
+
+                        <p class="section_title">Designing the PCB</p>
+                        <p class="section_text">
+                            I started out designing the PCB that would become the clock face. First step was to choose a controller
+                            to use in the design. Since I was trying to keep it sort of simple I opted for PIC microcontroller. I'm most 
+                            familiar with PIC as far as development environments go, and wasn't looking to include any fancy internet connected
+                            features or anything like that. Specifically, I used the PIC18F46J50 in part because I had one laying around, but also
+                            because it happens to have an integrated real time clock (RTC) module that will keep track of time without any
+                            software interaction. For the other parts in the system, here's a short list of some of the main ones:
+                            A full list of components used can be found at in the CSV file at the last link. I'll also attach all of the design
+                            files to this page in case anyone wants to take a look or use them. 
+                        </p>
+
+                        <p class="section_text">
+                        <ul>
+                            <li><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/39931b.pdf">PIC18F46J50</a></li>
+                            <li><a href="https://www.sparkfun.com/products/11405">7 segment disply</a></li>
+                            <li><a href="https://www.sparkfun.com/products/540">32.768kHz Crystal</a></li>
+                            <li><a href="http://www.ti.com/lit/ds/symlink/tlv62569.pdf">TLV62569 3.3V switching regulator</a></li>
+                            <li><a href="./pcb_clock_media/Final_BOM.csv">...Full BOM CSV File Download</a></li>
+                        </ul>
+                        </p>
+
+                        <p class="section_text">
+                            I've previously used Eagle to design the few PCBs I've done, but I kind of don't love using it. I decided to give DipTrace
+                            a try for this particular board design and ended up liking it a lot more. Not really related to this post, but I thought
+                            I'd bring it up because I liked it so much more :). It just felt a lot more polished and easy to use. 
+                            Anyway... on to the schematic design... Below are images of the final schematic used for the clock.
+                        </p>
+                         
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/PCB_Clock_schematic_1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/PCB_Clock_schematic_1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/PCB_Clock_schematic_2&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/PCB_Clock_schematic_2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            The board is powered by a 5V input from a micro USB cable. That voltage net is used to drive the RGB LEDs and speaker through load switch FETs. 
+                            The 5V VIN also goes to the backup battery charger, and a 3.3V switching buck voltage regulator. That 3.3V output powers the PIC
+                            microcontroller. The power schematic sheet also includes a circuit that I designed to switch the supply voltage from the 5V 
+                            input to a backup battery. The circuit uses a comparitor to compare the 5V input to the 3.7V LiPo battery voltage. If the 5V input 
+                            drops below the Vbatt voltage, the comparitor switches on a P channel FET that connects the battery voltage to the 3.3V output.
+                            This means that only the PIC microcontroller will be powered while running from the battery. The PIC would also get a notification
+                            that it is running on battery power by checking the POWER_GOOD signal from the 3.3V regulator. This allows the PIC to stop trying to
+                            power the RGB LEDs and speaker, and simply enter sleep and maintain the time.
+                        </p>
+                        <p class="section_text">
+                            The PIC has several key functions. It accepts input from the user through several buttons simply connected to GPIOs configured as 
+                            inputs. It uses GPIO outputs to control a 4 digit seven segment LED display. The way that the 7 segment LED display is controlled 
+                            by only displaying a single digit at a time, but updating which digit is displayed very quickly so they appear to all be lit. 
+                            See here for a pretty good 
+                            <a href="https://www.hackster.io/meljr/sparkfun-com-11408-4-digit-7-segment-display-hookup-guide-4b4d9e">explanation of 7 segment operation</a>.
+                            This particular PIC chip has a hardware real time clock that needs an external 32.768kHz crystal for accurate operation, so that crystal
+                            is included. For the main PIC oscillator the internal oscillator source is used, so it doesn't require yet another crystal. As 
+                            stated earlier, the PIC controls the RGB LEDs and speaker through n-channel FET load switches. The speaker one includes a capacitor
+                            site to implement a simple low pass filter in order to generate a smooth audio waveform from a PWM signal.  
+                        </p>
+
+                        <p class="section_text"> 
+                            Once the schematic was done, I moved on to layout of the PCB. The image below show the completed final layout. 
+                        </p>
+
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_design_1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/pcb_design_1.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            Since I was going to be printing the PCB myself, I 
+                            wanted to make the PCB one sided. There are still a lot of wires that had to be hand soldered to the back of the 
+                            PCB to make it work, but a good amount of the design is still on the front side. For the mountain scene, I just googled
+                            for a black and white mountain scene and this one is the one I liked best. Diptrace has a cool feature where if you add 
+                            and image to the design, it automatically makes black metal and white negative space.
+                        </p>
+
+
+                        <p class="section_title">Making the PCB</p>
+
+                        <p class="section_text">
+                            The next step in the process was to actually make the printed circuit board. I found a couple videos on youtube
+                            the showed how to do this namely this one: <a href="https://www.youtube.com/watch?v=tWnfnt2rNO0&t=400s">Circuit Skills: Circuit Board Etching</a>
+                            The method that I used which is outlined in that video is the photoresist method, and I actually bought a kit to do it. 
+                            The kit can be found here: 
+                            <a href="https://www.amazon.com/MG-Chemicals-416-K-Piece-Photofabrication/dp/B005T8VOBM/">MG Chemicals 416-K 9 Piece Photofabrication Kit</a>
+                            The basic idea is that you
+                            buy a board that is covered in a layer of copper and a photoresist (a material that will be removed only if it is
+                            exposed to light). You then print out your PCB design on a transparency sheet like the ones used for overhead projectors.
+                            The board is then covered with this transparency sheet and exposed to light for ~10 minutes. Once that's done, the board
+                            is placed in a developer solution that will remove only the resist that has been exposed to the light (positive developer).
+                            This leaves the metal layer underneath the resist exposed so that it can be etched away by the acid. The acid used to etch
+                            the metal is Ferric Chloride. It stains literally anything so you have to be kind of careful with it. The below images
+                            show the process.
+                        </p>
+
+                        <table align="center">
+                            <tr>
+                                <td colspan=2 align="center">
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_manufacture_annotated_1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/pcb_manufacture_annotated_1.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/etching_pcb&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/etching_pcb_thumb.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/etching_pcb2&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/etching_pcb2_thumb.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            The PCB etch process took a few tries to get right and even then I never really got it to work perfectly. You can see in 
+                            the right side of the PCB, it didn't really get etched completely. I think that was because we didn't leave it in the 
+                            developer long enough. In any case, I had to physically cut out some of the traces with an exacto knife to make it 
+                            useable, but it still ended up looking pretty good I think. Also, you can tell that I made it because it's far from perfect :).
+                        </p>
+
+                        <p class="section_text">
+                            Once the board had been etched the next step was to drill all of the holes for the vias. I bought a stand for my dremel
+                            that allows you to use the dremel as a drill press which was really handy for this purpose. I had to buy some really thin
+                            drill bits to go along with it as well. The via sizes I used for the PCB were much smaller than the drill bits I had.
+                        </p>
+
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_drill&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/pcb_drill.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_after_drill&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/pcb_after_drill.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            The next step was to finally start populating and testing the board! The PCB is single sided, but still requires quite
+                            a few wires to be soldered to the back side to make it work. After many hours of soldering, I finished populating and
+                            testing the board, and below are some images of the results. As you can see, I made a few mistakes with the schematic
+                            that had to be fixed with some fly-wire. Mainly, I used some pins on the microcontroller that weren't actually outputs
+                            , or used ones that had lower current limits than I wanted for the seven segment LEDs.
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/finished_pcb1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/finished_pcb1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/finished_pcb2&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/finished_pcb2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_title">Software</p>
+                        <p class="section_text">
+                            Now for the really tedious part. This ended up being a lot more time and work than I thought it was going to be.
+                            That could probably be said about most things though... The code for the PIC was written in C. Each functional area
+                            had it's own file for example, the RGB LEDs, speaker, clock, and seven segment display, all had their own files.
+                            The code is organized so that the main loop just calls a task function for each of the functional areas. That task
+                            checks if it has something to do, then executes it and jumps back to the main loop. Much of the functionality of the
+                            clock requires waiting for specific time intervals before an action is taken. For example, the seven segment display has
+                            to wait a certain amount of time before it updates which digit it's displaying and the buttons have to wait certain
+                            times before they can sample for debouncing. Because pretty much all functions require
+                            this ability, all of them use a common 'System Clock' to measure how much time has elapsed since the last event. That way
+                            each function simply needs to mark the system tick timestamp where it started and subsequently check the current timestamp 
+                            to see how much time has elapsed. The system clock measures ticks in 1ms increments and is implemented with a hardware timer.
+                            The benefit to doing it this way is that a the processor can go service other tasks while the current task is waiting for 
+                            something. 
+                        </p>
+                        <p class="section_text">
+                            The other (maybe) interesting part about the code is the implementation of the speaker alarm tone.
+                            For this, I found someones code online that converts a wav file into a C array of PCM values here: 
+                            <a href="http://ccgi.cjseymour.plus.com/wavtocode/wavtocode.htm">Wav to C Converter</a> (thanks CJ!).
+                            So I had the option to use any audio file as the alarm tone once I wrote the PWM code. To actually
+                            get sound out of a speaker you need  digital to analog converter to convert the digital audio sample values into
+                            a voltage that drives the speaker. In this case I used the Pulse Width Modulation (PWM) feature of the PIC
+                            in conjunction with a simple low pass filter to recreate the waveform. Using Audacity, I created a simple
+                            beeping tone and exported it to an 8 bit 8kHz wav file. Then using the above tool, got an array of PCM values
+                            that I could plug directly into the PWM duty cycle register in 1/8kHz second intervals to recreate the sound.
+                        </p>
+                        <p class="section_text">
+                            If you're interested in more details of the code, I'm putting a link to a zip file containing the full source code
+                            at the bottom of the page, so feel free to go through it! 
+                        </p>
+
+                        <p class="section_title">3D Printing the Enclosure</p>
+                        <p class="section_text">
+                            This is the first time I've actually attempted to 3D print anything. Instead of buying a 3D printer, I designed the enclosure in 
+                            SketchUp and used an online service to actually do the printing. I ended up using <a href="https://www.3dhubs.com">3D Hubs</a> to 
+                            print it as it was by far the cheapest. It's a little bit different in that it's a network of independent people with printers who are near you
+                            that print the design and send it to you as opposed to a centralized company. It's kind of like rideshare for 3D printing. It 
+                            worked out super well for me, and I'm really happy with how it turned out.
+                        </p>
+                        <p class="section_text">
+                            The first step was actually designing the enclosure in CAD. I used Sketchup only because I've used it a little 
+                            bit before. I'm not sure it's really the best for 3d printing, but hey...it works. This was definitely a "learn as
+                            you go" kind of process. I have pretty much no CAD experience and this took WAAAYYYYY longer than it should have. 
+                            The design itself is really just a hollow box with an angled back side. I made sure to include the holes for all of
+                            the buttoms, speaker, and mounting holes so I didn't have to drill into it too much. I also decided to have the labels
+                            for each of the buttons incorporated into the printed model. I though it would look a lot more professional than me writing the
+                            labels with a sharpie. Here are some images of the final CAD model.
+                        </p>
+
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/enclosure_design_sketchup&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/enclosure_design_sketchup.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/enclosure_design_sketchup2&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/enclosure_design_sketchup2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            For the material of the part, there were a bunch of options. I ended up choosing ABS as it is supposed to be stronger than PLA. 
+                            There was a bit of difficulty getting the part printed w/ ABS as it was warping, but eventually they were able to get it
+                            printed with a few tweaks to my amateur design. A few days later I had the final enclosure! Here are some images of how it
+                            turned out.
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/enclosure1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/enclosure1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/enclosure2&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/enclosure2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            As you can see from the images, the surface is really rough and you can see the individual print lines. To give it a better
+                            finish, I decided to sand it down. I first used a higher grit sandpaper, and worked down to a finer grain to give it a smooth
+                            finish. It ended up losing some of the black color and becoming kind of gray during the sanding process. I considered painting
+                            it, but it actually does look kind of cool. It almost looks like a gray wood finish even though it's plastic.
+                            See the images in the final section for the results. 
+                        </p>
+
+                        <p class="section_title">Putting it All Together</p>
+                        <p class="section_text">
+                            Wooo finally done! Once everything was ready, I hot-glued all of the wires and components on the back of the
+                            PCB for strain relief. I Also hot-glued the speaker, USB plug, and Snooze button into place. The +/-/SET buttons are all panel mount
+                            so they simply get screwed into place. The PCB is held on by some plastic standoffs that are glued into the mounting holes. I cut
+                            a piece of acrylic glass to go over the front of the clock because ESD would make it restart everytime I touched it, and I'm 100%
+                            sure that I'd break it eventually by shocking it. Anyway here's the final thing!!!
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/clock_inside1&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/clock_inside1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/finished_back&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/finished_back.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/clock_side&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/clock_side.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=pcb_clock_media/clock_final&referer=pcb_clock">
+                                        <img class="section_image" src="pcb_clock_media/clock_final.jpg">
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                        </table>
+
+
+                        <p class="section_title">All Design Documents</p>
+                        <p class="section_text">
+                            <ul>
+                                <li><a href="pcb_clock_media/pcb_clock_enclosure_design_final_canidate.skp">Enclosure Sketchup File</a></li>
+                                <li><a href="pcb_clock_media/pcb_alarm_clock_board.zip">PCB Design Files</a></li>
+                                <li><a href="pcb_clock_media/Alarm_Clock.X.zip">PIC Microcontroller Code</a></li>
+                            </ul>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                        </p>
+
+
+
+                    </td>
+                     
+
+
+                    <td class="main_image">
+                        <a href="picture_viewer.php?img=pcb_clock_media/pcb_clock_1&referer=pcb_clock">
+                            <img src="pcb_clock_media/pcb_clock_title.jpg" class="main_image" />
+                        </a>
+                    </td>
+                </tr>
+
+                <!--
+                <tr>
+                    <td colspan="2">
+                        <p class="section_title">More Pictures</p>
+                        <table class="img_table">
+                            <tr>
+
+                                <td class="img_td">
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_printed&referer=pcb_clock">
+                                        <img src="pcb_clock_media/thumbnails/pcb_printed_thumb.jpg" class="img_thumb"
+                                        />
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                -->
+
+            </table>
+        </div>
+
+        <!--footer      -->
+        <div id="footer">
+            Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp | &nbsp &nbsp &nbsp &nbspPage Last updated 07/2018
+        </div>
+
+
+    </div>
+
+    </div>
+</body>
+
+</html>

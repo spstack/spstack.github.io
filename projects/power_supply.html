@@ -1,0 +1,517 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../main.css" />
+    <link rel="stylesheet" type="text/css" href="project_pages.css" />
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+        var blue_pressed = 0;
+        var green_pressed = 0;
+        var red_pressed = 0;
+
+        var redColor = 255;
+        var greenColor = 255;
+        var blueColor = 255;
+
+        var mouseY = 0;
+
+        var redPotLine;
+        var greenPotLine;
+        var bluePotLine;
+
+        function unPressButtons() {
+            if (red_pressed == 1) {
+                red_pressed = 0;
+            }
+            else if (green_pressed == 1) {
+                green_pressed = 0;
+            }
+            else if (blue_pressed == 1) {
+                blue_pressed = 0;
+            }
+        }
+
+        function mouseMoved(evt) {
+            mouseY = evt.clientY;
+        }
+
+        setInterval(function monitorMouse() {
+            var redtest = document.getElementById("redtest");
+            var greentest = document.getElementById("greentest");
+            var bluetest = document.getElementById("bluetest");
+
+            if (red_pressed == 1) {
+                redColor = 255 / 200 * mouseY;
+                redPot.setAttribute("transform", "rotate(" + 360 / 255 * redColor.toString() + " 902 72)");
+
+                //redtest.innerHTML = redColor.toString(); 
+            }
+            else if (green_pressed == 1) {
+                greenColor = 255 / 200 * mouseY;
+                greenPot.setAttribute("transform", "rotate(" + 360 / 255 * greenColor.toString() + " 982 72)");
+
+                //greentest.innerHTML = greenColor.toString(); 
+            }
+            else if (blue_pressed == 1) {
+                blueColor = 255 / 200 * mouseY;
+                bluePot.setAttribute("transform", "rotate(" + 360 / 255 * blueColor.toString() + " 1062 72)");
+
+                //bluetest.innerHTML = blueColor.toString(); 
+            }
+
+            document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+        }, 100);
+
+
+    </script>
+
+</head>
+
+
+<body>
+    <div id="page">
+        <div id="Banner">
+
+            <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+            <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+
+            <script>
+                var redPot;
+                var greenPot;
+                var BluePot;
+
+                var svgElm = document.getElementById("svg_circuit");
+                svgElm.addEventListener("load", function () {
+                    var svgDoc = svgElm.contentDocument;
+
+                    svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+                        mouseY = evt.clientY;
+                    }, false);
+
+                    svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+                        if (clickedOnce == 0) {
+                            if (red_pressed == 1) {
+                                red_pressed = 0;
+                            }
+                            if (green_pressed == 1) {
+                                green_pressed = 0;
+                            }
+                            if (blue_pressed == 1) {
+                                blue_pressed = 0;
+                            }
+                        }
+                        clickedOnce = 0;
+                    }, false);
+
+                    redPot = svgDoc.getElementById("red_pot");
+                    redPot.addEventListener("mousedown", function redPressed() {
+                        red_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    redPot.style.cursor = "pointer";
+
+                    greenPot = svgDoc.getElementById("green_pot");
+                    greenPot.addEventListener("mousedown", function greenPressed() {
+                        green_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    greenPot.style.cursor = "pointer";
+
+                    bluePot = svgDoc.getElementById("blue_pot");
+                    bluePot.addEventListener("mousedown", function bluePressed() {
+                        blue_pressed = 1;
+                        clickedOnce = 1;
+                    }, false);
+                    bluePot.style.cursor = "pointer";
+
+
+                }, false);
+            </script>
+
+        </div>
+
+        <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+            <table class="navbar_table" cellspacing="0">
+                <tr>
+                    <td class="navbar_entry">
+                        <a href="../index.html">
+                            Home
+                        </a>
+                    </td>
+
+                    <td class="navbar_entry">
+                        <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+                            Projects
+                        </a>
+                        <ul>
+                            <li class="submenu_item">
+                                <a href="power_supply.html">Bench Power Supply</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="pcb_clock.html">PCB Alarm Clock</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="night_vision.html">Night Vision Goggles</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="desk.html">Motorized Desk</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="IR_recorder.html">IR Recorder</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="home_automation_v2.html">Home Automation V2</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="internet_robot.html">Internet Robot</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="N64_mod.html">N64 Mod</a>
+                            </li>
+                            <li class="submenu_item">
+                                <a href="../projects.html">. . .</a>
+                            </li>
+                        </ul>
+                    </td>
+
+                    <td class="navbar_entry">
+                        <a href="../contact.html">
+                            Contact
+                        </a>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="main_content">
+            <h1 id="project_title">Lab Bench Power Supply</h1>
+            <p id="project_date">Posted April 2019</p>
+
+            <table>
+                <tr>
+                    <td class="text_td">
+                        <p class="section_title">Overview</p>
+                        <p class="section_text">
+                            I've wanted a bench power supply for a while now, but just never got around to buying one. So instead of spending
+                            $80 on a decent one like a reasonable person, I decided to spend months of my time and a lot more money making one :) A lab power
+                            supply is one that can produce a wide range of voltages and also limit the current that it draws. This is super useful
+                            for prototyping electronics because you might need a wide range of voltages, and if you happen to short something, the current will
+                            still be limited so that you don't damage anything too badly. 
+                            This particular power supply can go anywhere from around 0.7V to 27V at 3A and has an adjustable current limit from ~100mA to 3A. 
+                            I thought it would be cool to put it in a transparent case, so I custom made the enclosure out of quarter inch acrylic. It also has blue and red LEDs whose
+                            brightness depend on the voltage and current respectively. I had a lot of fun designing this as it's entirely hardware with
+                            no software, and I haven't done anything like it before.
+                            <br/>
+                            <br/>
+
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/kfOwdm2kg5o" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        </p>
+
+                        <p class="section_title">Initial Design</p>
+                        <p class="section_text">
+                            After doing a whole bunch of research I based the design pretty heavily on an app note from Analog Devices <a href="https://www.analog.com/en/technical-articles/high-performance-portable-dc-bench-power-supply.html">here</a>.
+                            This design uses a kind of two stage approach where a tracking switching regulator drops most of the input voltage, then two fancy linear
+                            regulators actually supply the output. The switching regulators output voltage is set to about 2V above the actual output voltage of
+                            the supply. This ensures that minimal voltage is dropped across the linear regulators resulting in less heat dissipated and a clean output.
+                            The input stage of the supply uses a simple combination of transformer, rectifier, and capacitors to drop the 120V wall voltage to ~30V DC.
+                            Here's a block diagram of the initial design.
+                        </p>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/block_diagram&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/block_diagram.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+ 
+
+                        <p class="section_title">Schematic</p>
+                        <p class="section_text">
+                            The first step was to design the AC to DC conversion board. Below is a snapshot of the schematic for the AC to DC board.  The
+                            board is pretty simple. It takes in (externally fused) 120V AC voltage from the wall, filters overvoltage conditions with a varistor and filters transient voltage spikes with
+                            capacitors. It also blocks high frequency noise on the AC input with a 'choke' inductor. From there a power transformer
+                            steps the voltage down to 20V RMS AC. A full bridge rectifier with large output caps converts that AC voltage into about 30V DC
+                            (plus/minus a few volts depending on load). One of the major mistakes I made in designing this was forgetting that transformer output voltage is specified in RMS,
+                            which results in a much higher peak voltage. I bought a 120V/240V -> 40V transformer (2 20V windings that can connect in series) thinking I could make the max
+                            output voltage somewhere slightly above 30V, but a 40V transformer actually outputs 57V when rectified (the peak of the sine wave). The rated voltage
+                            is also specified at the highest current draw which takes into account IR losses in the windings. This means that the output could creep up above 60V when lightly loaded
+                            which was too high for many of the components I designed into the main supply board. So I had to fly-wire it to just use one of the outputs for 20V RMS which limited my max
+                            output voltage to below 30V :(
+                            Definitely a learning experience...
+                        </p>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/ACDC_schematic&referer=power_supply">
+                                        <img style="width : 100%; margin : 0px; padding-left : 1em" src="power_supply_media/ACDC_schematic.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+ 
+                        <p class="section_text">
+                            The next part of the design was the main power supply board which takes the intermediate 30V from the ACDC board and regulates down to
+                            the actual output voltage. This is the board that I based heavily on the Analog Devices application note above. Below are the snapshots
+                            of the schematic.
+                        </p>
+
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/MainBoard_schematic1&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/MainBoard_schematic1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/MainBoard_schematic2&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/MainBoard_schematic2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                       <p class="section_text">
+                           There's a lot more going on here, but the main idea is that a TI switching regulator will buck the input voltage down to just barely above the
+                           final output voltage, so that 2 linear regulators can produce the final (cleaner) output. There's a feedback loop where the output voltage is set
+                           by forcing a constant current across a potentiometer and connecting that to the SET pin of the linear regulators. This output connects to the 
+                           feedback network of the TI regulator which then sets the TI's output to ~2.2V above the main output. This ensures that there is only minimal voltage
+                           dropped across the linear regulators and thus much less power/heat dissipated as waste. I.e. it's much more efficient. 
+                       </p> 
+                       <p class="section_text">
+                           While the supply can technically go up to 27V and supply 3A, it can't do both at the same time. It's actually limited by the power rating of the transformer which is 48VA (max 2.4A @20V RMS output). So,
+                           I had to add a power protection circuit to prevent too much power from being consumed by the output. The power protection circuit consists of 2 opamps, one configured 
+                           as a differential amplifier, and another configured as a comparitor. All of the current consumed by the supply travels through a current sense resistor
+                           which generates a small voltage across it proportional to the current being drawn. The differential amplifier takes that voltage and amplifies it by a factor
+                           of 4. The output of this amplifier is a voltage equal to the current draw in amps (V_diff * 4 * 0.25Ohms). This voltage is compared with a reference voltage
+                           of 2.2V (2.2A), and if the current draw is more than that, the comparitor will turn on a BJT transistor that will set the output voltage to 0.
+                       </p>
+                       <p class="section_text">
+                            Last but not least, the thing has to look cool, so I added some LEDs whos brightness change based on the output voltage and current. The brightness of
+                            two blue LEDs changes based on the output voltage, and the brightness of two red LEDs changes based on the output current. With the clear plastic
+                            case it ends up looking pretty sweet.
+                        </p>
+
+                        <p class="section_title">PCB(s) Design</p>
+
+                        <p class="section_text">
+                            Next up is the layout of the printed circuit boards. The AC/DC board is only a single sided board because I decided to print it myself. It's pretty big
+                            and really simple, so it felt like kind of a waste to pay to have it printed. I still have the equipment and everything from when I printed the alarm
+                            clock PCB. 
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/MainBoard_layout&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/MainBoard_layout.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/ACDC_layout&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/ACDC_layout.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <p class="section_text">
+                            Here are the boards after they've been made. The printing of the AC/DC board didn't go super well, but it ended up working well enough. There's a couple
+                            places where the mask got scratched, and etched away which I had to patch with solder. The main board was (obviously) professionally made, and turned out
+                            pretty well. 
+                        </p>
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_mainboard&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_mainboard.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_ACDC_board&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_ACDC_board.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_title">Putting it All Together</p>
+                        <p class="section_text">
+                            After the boards were made I could start populating them. I found a few issues during testing of the board. Namely the fact that I had to re-wire the 
+                            connections to the transformer. I also had an issue with the feedback circuit that sets the voltage of the switching regulator. It was setting the
+                            voltage too low and was causing the input voltage to the linear regulators to drop below their dropout voltage under load. I just had to adjust R7 to a
+                            slightly higher value to compensate. Other than that it went pretty well! I hit fewer issues than I was expecting for a project of this size really.
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/assembly1&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/assembly1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/assembly2&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/assembly2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <p class="section_title">Building the Enclosure</p>
+                        <p class="section_text">
+                            I've gotten a lot better at CAD since I did the alarm clock project. I've been watching videos trying to learn Fusion 360 instead of sketchup. It seems
+                            to be much more fully featured than sketchup although maybe that's just because I took more time to learn it. Anyhoo, I
+                            knew I wanted to make the final enclosure out of see-through sheets of acrylic, but I modeled the whole thing in Fusion first to make sure everything would fit nicely.
+                            Diptrace (the PCB cad software I used) has a cool feature where you can export a 3d rendering of your board, so I was able to import the board designs into
+                            the fusion model. I took a long time making the model detailed mostly just to practice with Fusion.
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/powersupply_cad_drawing&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/powersupply_cad_drawing.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/powersupply_cad_drawing2&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/powersupply_cad_drawing2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class="section_text">
+                            Building the enclosure was then just a matter of cutting out several sheets of 1/4" plastic, cutting some holes in them, and cementing it
+                            all together with some special acrylic adhesive. Sounds simple, but it actually took me forever because I'm not that good with mechanical stuff :) 
+                        </p>
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/building_enclosure1&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/building_enclosure1.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/building_enclosure2&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/building_enclosure2.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+
+                        <p class="section_title">Finished Product!</p>
+                        <p class="section_text">Here's some pictures of the final thing!</p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_power_supply2&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_power_supply2.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_power_supply3&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_power_supply3.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_power_supply5&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_power_supply5.jpg">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="picture_viewer.php?img=power_supply_media/finished_power_supply4&referer=power_supply">
+                                        <img class="section_image" src="power_supply_media/finished_power_supply4.jpg">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+
+                        <p class="section_title">All Design Documents</p>
+                        <ul>
+                            <li><a href="./power_supply_media/PowerSupply_BoardDesignFiles.zip">Power Supply Board Design Files and BOMs</a></li>
+                            <li><a href="./power_supply_media/Lab Power Supply Enclosure v1 v8.step">3D Model of Enclosure</a></li>
+                            <br/>
+                            <li><strong>Misc. Items From Amazon</strong>
+                                <ul>
+                                    <li><a href="https://www.amazon.com/gp/product/B07C1567XW/ref=ppx_yo_dt_b_asin_title_o04_s02?ie=UTF8&psc=1">AC Socket</a></li>
+                                    <li><a href="https://www.amazon.com/gp/product/B07D6WXVHW/ref=ppx_yo_dt_b_asin_title_o02_s01?ie=UTF8&psc=1">Internal Fan</a></li>
+                                    <li><a href="https://www.amazon.com/gp/product/B01FIMWAHU/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1">Acrylic Sheet</a></li>
+                                    <li><a href="https://www.amazon.com/gp/product/B00IZTTAKO/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1">Voltage/Current Meter</a></li>
+                                    <li><a href="https://www.amazon.com/gp/product/B079JN626M/ref=ppx_yo_dt_b_asin_title_o04_s01?ie=UTF8&psc=1">Potentiometers</a></li>
+                                </ul>
+                            </li>
+                        </ul>                         
+
+                    </td>
+                     
+
+
+                    <td class="main_image">
+                        <a href="picture_viewer.php?img=power_supply_media/finished_power_supply&referer=power_supply">
+                            <img src="power_supply_media/finished_power_supply.jpg" class="main_image" />
+                        </a>
+                    </td>
+                </tr>
+
+                <!--
+                <tr>
+                    <td colspan="2">
+                        <p class="section_title">More Pictures</p>
+                        <table class="img_table">
+                            <tr>
+
+                                <td class="img_td">
+                                    <a href="picture_viewer.php?img=pcb_clock_media/pcb_printed&referer=pcb_clock">
+                                        <img src="pcb_clock_media/thumbnails/pcb_printed_thumb.jpg" class="img_thumb"
+                                        />
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                -->
+
+            </table>
+        </div>
+
+        <!--footer      -->
+        <div id="footer">
+            Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp | &nbsp &nbsp &nbsp &nbspPage Last updated 04/2019
+        </div>
+
+
+    </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+/*  projects page styling  */
+
+#projects_table {
+    color : black;
+    padding-top : 25px;
+}
+
+.descr_table_entry {
+    padding : 15px 15px 25px 15px;
+    vertical-align : top;
+}
+
+.project_title {
+    font-size : 24px;
+    text-decoration : none;
+    color : #2222AA;
+    vertial-align : top;
+}
+
+.project_description {
+    padding-left : 2em;
+    font-family : ariel;
+    font-size : 18px;
+}
+
+.project_title:hover {
+    text-decoration : underline;
+}
+
+.project_image {
+    margin : 15px 15px 15px 15px;
+    width : 300px;
+    height : 250px;
+    border-style : solid;
+    border-width : 1px;
+    border-color : black; 
+}

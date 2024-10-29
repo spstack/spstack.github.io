@@ -1,0 +1,95 @@
+/* Styling page for the project detail pages */
+
+
+#project_title {
+    font-family : arial;
+    font-size : 30px;
+    font-style : italic;
+    padding-left : 25px;
+    text-align : center;
+}
+
+#project_date {
+    font-family : arial;
+    font-size : 16px;
+    font-style : italic;
+    padding-left : 25px;
+    text-align : center;
+}
+
+
+.main_image {
+		vertical-align : top;
+		padding-top : 0px;
+    width : 364;
+    height : 300;
+    margin : 15px;
+}
+
+.section_title {
+    font-family : arial;
+    font-size : 24px;
+    padding-left : 2em;
+    padding-top : 40px;
+    vertical-align : text-top;
+}
+
+
+.section_text {
+    font-family : arial;
+    font-size : 17px;
+    padding-left : 2em;
+    text-indent : 2em;
+}
+
+
+img.section_image {
+    padding-left : 1em;
+		width : 100%;
+		margin : 0px;
+        max-width : 750px;
+}
+
+td.section_image {
+    padding-left : 1em;
+		width : 100%;
+}
+
+
+#video_demo_link {
+    font-size : 20px;
+    font-family : arial;
+    font-style : none;
+    color : blue;
+    padding-left : 2em;
+}
+
+#code_link {
+    font-size : 20px;
+    font-family : arial;
+    font-style : none;
+    color : blue;
+    padding-left : 2em;
+}
+
+
+.img_table {
+    padding-top : 15px;
+    padding-left : 4em;
+}
+
+td.img_td {
+    padding : 5px 10px 10px 10px;
+    /*padding : 5px 20px 20px 20px;*/
+}
+
+.img_thumb {
+    width : 200;
+    height : 200;
+    border-style : solid;
+    border-width : 1px;
+}
+
+.text_td {
+    vertical-align : text-top;
+}

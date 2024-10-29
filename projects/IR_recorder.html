@@ -1,0 +1,239 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+      var blue_pressed = 0;
+      var green_pressed = 0;
+      var red_pressed = 0;
+
+      var redColor = 255;
+      var greenColor = 255;
+      var blueColor = 255;
+
+      var mouseY = 0;
+      
+      var redPotLine;
+      var greenPotLine;
+      var bluePotLine;
+
+      function unPressButtons() {
+        if (red_pressed == 1) {
+          red_pressed = 0;
+        }
+        else if (green_pressed == 1) {
+          green_pressed = 0;
+        }
+        else if (blue_pressed == 1) {
+          blue_pressed = 0;
+        }
+      }
+
+      function mouseMoved(evt) {
+        mouseY = evt.clientY;
+      }
+
+      setInterval(function monitorMouse() {
+        var redtest = document.getElementById("redtest");
+        var greentest = document.getElementById("greentest");
+        var bluetest = document.getElementById("bluetest");
+
+        if (red_pressed == 1) {
+          redColor = 255/200 * mouseY;
+          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
+          
+          //redtest.innerHTML = redColor.toString(); 
+        }
+        else if (green_pressed == 1) {
+          greenColor = 255/200 * mouseY;
+          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
+
+          //greentest.innerHTML = greenColor.toString(); 
+        }
+        else if (blue_pressed == 1) {
+          blueColor = 255/200 * mouseY;
+          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
+
+          //bluetest.innerHTML = blueColor.toString(); 
+        }
+
+        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+      }, 100);
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div id="page">
+      <div id="Banner">
+        
+        <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+        <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+        
+        <script>
+          var redPot;
+          var greenPot;
+          var BluePot;
+          
+          var svgElm = document.getElementById("svg_circuit"); 
+          svgElm.addEventListener("load",function(){
+          var svgDoc = svgElm.contentDocument;
+
+          svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+            mouseY = evt.clientY;
+          }, false);
+
+          svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+            if (clickedOnce == 0) {
+                  if (red_pressed == 1) {
+                    red_pressed = 0;
+                  }
+                  if (green_pressed == 1) {
+                    green_pressed = 0;
+                  }
+                  if (blue_pressed == 1) {
+                    blue_pressed = 0;
+                  }
+            }
+            clickedOnce = 0;
+          }, false);
+
+          redPot = svgDoc.getElementById("red_pot");
+          redPot.addEventListener("mousedown",function redPressed() {
+            red_pressed = 1;
+            clickedOnce = 1;
+          } , false);
+          redPot.style.cursor = "pointer";
+          
+          greenPot = svgDoc.getElementById("green_pot");
+          greenPot.addEventListener("mousedown",function greenPressed() {
+                green_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          greenPot.style.cursor = "pointer";
+          
+          bluePot = svgDoc.getElementById("blue_pot");
+          bluePot.addEventListener("mousedown",function bluePressed() {
+            blue_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          bluePot.style.cursor = "pointer";
+
+              
+          },false);
+        </script>
+
+       </div>
+
+          <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+        <table class="navbar_table" cellspacing="0">
+          <tr>
+            <td class="navbar_entry">
+              <a href="../index.html">
+            Home
+              </a>
+            </td>
+            
+            <td class="navbar_entry">
+              <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+            Projects
+              </a>
+              <ul>
+                <li class="submenu_item"><a href="power_supply.html">Bench Power Supply</a></li>
+                <li class="submenu_item"><a href="pcb_clock.html">PCB Alarm Clock</a></li>
+                <li class="submenu_item"><a href="night_vision.html">Night Vision Goggles</a></li>
+                <li class="submenu_item"><a href="desk.html">Motorized Desk</a></li>
+                <li class="submenu_item"><a href="IR_recorder.html">IR Recorder</a></li>
+                <li class="submenu_item"><a href="home_automation_v2.html">Home Automation V2</a></li>
+                <li class="submenu_item"><a href="internet_robot.html">Internet Robot</a></li>
+                <li class="submenu_item"><a href="N64_mod.html">N64 Mod</a></li>
+                <li class="submenu_item"><a href="../projects.html">. . .</a></li>
+              </ul>
+            </td>
+
+            <td class="navbar_entry">
+              <a href="../contact.html">
+            Contact
+              </a>
+            </td>
+
+          </tr>
+        </table>
+        </div>
+
+        <div class="main_content">
+    <h1 id="project_title">IR Remote Recorder</h1>
+  
+  <table>
+    <tr>
+      <td class="text_td">
+        <p class="section_title">Overview</p>
+      <p class="section_text">
+        This little device can record any IR remote command and play it back. It's like a normal TV remote that only has one function! (not super useful I know...) I guess it is pretty fun to mess with people by randomly using it while they're watching TV. 
+      </p>
+
+      <p class="section_text">
+        To use it, you press the red button to start recording a commmand. The red light will come on to indicate recording has started. Then point the remote you want to record into the little hole in the front and press the button on the remote that you want to record. The red light will automatically turn off when the command has been succesfully recorded. Then you can press the black button to play that command back. Pretty simple. 
+        The box is powered by a 9 volt battery and uses an IR receiver and IR LED from sparkfun as well as a PIC microcontroller for the brain. All of the PIC code that I wrote for this is attached below if you're interested in taking a look. 
+
+        <br/>
+        <br/>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3ngwKrRpo1E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </p>
+
+
+      <p class="section_title">Download Code</p>
+        <p class="section_text">
+        <a href="IR_recorder_media/IR_recorder_code.zip"> PIC code for IR Recorder</a>
+        </p>
+
+    </td>
+      <td class="main_image">
+        <a href="picture_viewer.php?img=IR_recorder_media/IR_remote_recorder_1&referer=IR_recorder"><img src="IR_recorder_media/IR_remote_recorder_1.jpg" class="main_image"/></a>
+      </td>
+    </tr>
+  
+    <tr>
+      <td colspan="2">
+        <p class="section_title">More Pictures</p>
+        <table class="img_table">
+      <tr>
+        <td class="img_td">
+        <a href="picture_viewer.php?img=IR_recorder_media/IR_remote_recorder_2&referer=IR_recorder"><img src="IR_recorder_media/thumbs/IR_remote_recorder_2_thumb.jpg" class="img_thumb"/></a>
+        </td>
+
+      </tr>
+        </table>
+      </td>
+    </tr>
+    
+    
+  </table>
+      </div>
+
+      <!--footer      -->
+      <div id="footer">
+  Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
+  &nbsp &nbsp &nbsp &nbsp Last updated 01/2018
+      </div>
+
+
+        </div>
+
+    </div>
+    </body>
+</html>

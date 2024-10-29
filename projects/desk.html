@@ -1,0 +1,307 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+      var blue_pressed = 0;
+      var green_pressed = 0;
+      var red_pressed = 0;
+
+      var redColor = 255;
+      var greenColor = 255;
+      var blueColor = 255;
+
+      var mouseY = 0;
+      
+      var redPotLine;
+      var greenPotLine;
+      var bluePotLine;
+
+      function unPressButtons() {
+        if (red_pressed == 1) {
+          red_pressed = 0;
+        }
+        else if (green_pressed == 1) {
+          green_pressed = 0;
+        }
+        else if (blue_pressed == 1) {
+          blue_pressed = 0;
+        }
+      }
+
+      function mouseMoved(evt) {
+        mouseY = evt.clientY;
+      }
+
+      setInterval(function monitorMouse() {
+        var redtest = document.getElementById("redtest");
+        var greentest = document.getElementById("greentest");
+        var bluetest = document.getElementById("bluetest");
+
+        if (red_pressed == 1) {
+          redColor = 255/200 * mouseY;
+          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
+          
+          //redtest.innerHTML = redColor.toString(); 
+        }
+        else if (green_pressed == 1) {
+          greenColor = 255/200 * mouseY;
+          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
+
+          //greentest.innerHTML = greenColor.toString(); 
+        }
+        else if (blue_pressed == 1) {
+          blueColor = 255/200 * mouseY;
+          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
+
+          //bluetest.innerHTML = blueColor.toString(); 
+        }
+
+        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+      }, 100);
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div id="page">
+      <div id="Banner">
+        
+        <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+        <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+        
+        <script>
+          var redPot;
+          var greenPot;
+          var BluePot;
+          
+          var svgElm = document.getElementById("svg_circuit"); 
+          svgElm.addEventListener("load",function(){
+          var svgDoc = svgElm.contentDocument;
+
+          svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+            mouseY = evt.clientY;
+          }, false);
+
+          svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+            if (clickedOnce == 0) {
+                  if (red_pressed == 1) {
+                    red_pressed = 0;
+                  }
+                  if (green_pressed == 1) {
+                    green_pressed = 0;
+                  }
+                  if (blue_pressed == 1) {
+                    blue_pressed = 0;
+                  }
+            }
+            clickedOnce = 0;
+          }, false);
+
+          redPot = svgDoc.getElementById("red_pot");
+          redPot.addEventListener("mousedown",function redPressed() {
+            red_pressed = 1;
+            clickedOnce = 1;
+          } , false);
+          redPot.style.cursor = "pointer";
+          
+          greenPot = svgDoc.getElementById("green_pot");
+          greenPot.addEventListener("mousedown",function greenPressed() {
+                green_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          greenPot.style.cursor = "pointer";
+          
+          bluePot = svgDoc.getElementById("blue_pot");
+          bluePot.addEventListener("mousedown",function bluePressed() {
+            blue_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          bluePot.style.cursor = "pointer";
+
+              
+          },false);
+        </script>
+
+       </div>
+
+          <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+        <table class="navbar_table" cellspacing="0">
+          <tr>
+            <td class="navbar_entry">
+              <a href="../index.html">
+            Home
+              </a>
+            </td>
+            
+            <td class="navbar_entry">
+              <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+            Projects
+              </a>
+              <ul>
+                <li class="submenu_item"><a href="power_supply.html">Bench Power Supply</a></li>
+                <li class="submenu_item"><a href="pcb_clock.html">PCB Alarm Clock</a></li>
+                <li class="submenu_item"><a href="night_vision.html">Night Vision Goggles</a></li>
+                <li class="submenu_item"><a href="desk.html">Motorized Desk</a></li>
+                <li class="submenu_item"><a href="IR_recorder.html">IR Recorder</a></li>
+                <li class="submenu_item"><a href="home_automation_v2.html">Home Automation V2</a></li>
+                <li class="submenu_item"><a href="internet_robot.html">Internet Robot</a></li>
+                <li class="submenu_item"><a href="N64_mod.html">N64 Mod</a></li>
+                <li class="submenu_item"><a href="../projects.html">. . .</a></li>
+              </ul>
+            </td>
+
+            <td class="navbar_entry">
+              <a href="../contact.html">
+            Contact
+              </a>
+            </td>
+
+          </tr>
+        </table>
+        </div>
+
+        <div class="main_content">
+    <h1 id="project_title">Motorized Desk</h1>
+  
+  <table>
+    <tr>
+      <td class="text_td">
+        <p class="section_title">Overview</p>
+      <p class="section_text">
+        I bought a sit stand desk from Ikea a while back, and have liked it a lot actually. It comes with a hand crank that you use to raise and lower the desk. However, in order to make the crank easy to turn, they've geared it so you have to crank it like a million times in order to get the thing to go all the way up and down. That kind of got me thinking that I could add a motor to it to make it go up faster. Plus I could be lazy and not have to do any physical work to raise/lower it. I was able to get it working (with some difficulty), but it still moves super slowly unfortunately.
+
+        <span style="color:red">
+        <br/>
+        <br/>
+        EDIT (7/25/2018): I made some changes to the desk by switching to a set of relays instead of the H-Bridge module.
+        I found that the H-Bridge module could not source enough current to drive both of the motors, and was the limiting factor in the speed
+        that it moved. See the below <a href="#modifications">Modifications section</a>.
+        </span>
+      </p>
+
+      <p class="section_text", style="color:red">
+      </p>
+
+
+      <p class="section_text">
+        <br/>
+        <br/>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/pKyYEM-dN2o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </p>
+
+      <p class="section_title">Details</p>
+
+      <p class="section_text">
+        The image below on the left from Ikeas website shows what the desk looked like before, and on the right shows the finished product. I attached a small white junction box to the front of the desk with 2 buttons for raise and lower. The color of the box matches decently well which I'm pretty happy about.
+      </p>
+
+      <table>
+        <tr>
+          <td><a href="picture_viewer.php?img=desk_media/ikea_before&referer=desk"><img class="section_image" src="desk_media/ikea_before.jpg"></a></td>
+          <td><a href="picture_viewer.php?img=desk_media/desk_4&referer=desk"><img class="section_image" src="desk_media/desk_4.jpg"></a></td>
+        </tr>
+      </table>
+
+
+      <p class="section_text">
+        In order to fit the 2 motors, I had to cut the handle off of the shaft and attach the motors to each end. I actually started with one motor, but once I had everything together, it wasn't powerful enough to move the desk :/ . So I had to buy another one of the same thing and attach it to the other end of the shaft. The electronics are fairly simple. I bought an h-bridge module from amazon that already had screw terminals for the connections and everything. It was really just a matter of connecting the buttons up to the inputs of that module and putting it in a nice project box to make it look ok. Below is an image of the schematic and finished product in the project box. 
+      </p>
+
+
+
+      <table>
+        <tr>
+          <td><a href="picture_viewer.php?img=desk_media/desk_build_1&referer=desk"><img class="section_image" src="desk_media/desk_build_1.jpg"></a></td>
+          <td><a href="picture_viewer.php?img=desk_media/desk_schematic&referer=desk"><img class="section_image" src="desk_media/desk_schematic.jpg"></a></td>
+        </tr>
+      </table>
+
+      <p class="section_title", style="color:#CC1111"><a name="modifications", id="modifications">Modifications!</a>  (7/25/2018)</p>
+      <p class="section_text">
+        Because the H-Bridge module I chose above wasn't really rated for the current both motors were drawing, I decided to replace it with a set of relays. I bought this
+        <a href="https://www.amazon.com/gp/product/B00KTEN3TM/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1"><strong>RELAY MODULE</strong></a> from amazon and hooked it up to the motors using the following configuration:
+      </p>
+      <table align="center">
+        <tr>
+            <td>
+                <a href="picture_viewer.php?img=desk_schematic_UPDATED&referer=desk">
+                    <img class="section_image" src="desk_media/desk_schematic_UPDATED.jpg">
+                </a>
+            </td>
+        </tr>
+      </table>
+      <p class="section_text">
+        After making the above change it does seem to work a lot better :) It's still a little slow going but not nearly as bad as what's shown in the video. 
+      </p>
+
+
+
+
+    </td>
+      <td class="main_image">
+        <a href="picture_viewer.php?img=desk_media/desk_1&referer=desk"><img src="desk_media/desk_1.jpg" class="main_image"/></a>
+      </td>
+    </tr>
+  
+    <tr>
+      <td colspan="2">
+        <p class="section_title">More Pictures</p>
+        <table class="img_table">
+      <tr>
+        <td class="img_td">
+        <a href="picture_viewer.php?img=desk_media/desk_2&referer=desk"><img src="desk_media/thumbs/desk_2_thumb.jpg" class="img_thumb"/></a>
+        </td>
+
+        <td class="img_td">
+        <a href="picture_viewer.php?img=desk_media/desk_3&referer=desk"><img src="desk_media/thumbs/desk_3_thumb.jpg" class="img_thumb"/></a>
+        </td>
+
+
+        <td class="img_td">
+        <a href="picture_viewer.php?img=desk_media/desk_build_2&referer=desk"><img src="desk_media/thumbs/desk_build_2_thumb.jpg" class="img_thumb"/></a>
+        </td>
+
+
+        <td class="img_td">
+        <a href="picture_viewer.php?img=desk_media/desk_hand_crank&referer=desk"><img src="desk_media/thumbs/desk_hand_crank_thumb.jpg" class="img_thumb"/></a>
+        </td>
+
+
+
+
+      </tr>
+        </table>
+      </td>
+    </tr>
+    
+    
+  </table>
+      </div>
+
+      <!--footer      -->
+      <div id="footer">
+  Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
+  &nbsp &nbsp &nbsp &nbsp Last updated 01/2018
+      </div>
+
+
+        </div>
+
+    </div>
+    </body>
+</html>

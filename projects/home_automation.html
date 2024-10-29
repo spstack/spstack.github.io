@@ -1,0 +1,244 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+      var blue_pressed = 0;
+      var green_pressed = 0;
+      var red_pressed = 0;
+
+      var redColor = 255;
+      var greenColor = 255;
+      var blueColor = 255;
+
+      var mouseY = 0;
+      
+      var redPotLine;
+      var greenPotLine;
+      var bluePotLine;
+
+      function unPressButtons() {
+        if (red_pressed == 1) {
+          red_pressed = 0;
+        }
+        else if (green_pressed == 1) {
+          green_pressed = 0;
+        }
+        else if (blue_pressed == 1) {
+          blue_pressed = 0;
+        }
+      }
+
+      function mouseMoved(evt) {
+        mouseY = evt.clientY;
+      }
+
+      setInterval(function monitorMouse() {
+        var redtest = document.getElementById("redtest");
+        var greentest = document.getElementById("greentest");
+        var bluetest = document.getElementById("bluetest");
+
+        if (red_pressed == 1) {
+          redColor = 255/200 * mouseY;
+          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
+          
+          //redtest.innerHTML = redColor.toString(); 
+        }
+        else if (green_pressed == 1) {
+          greenColor = 255/200 * mouseY;
+          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
+
+          //greentest.innerHTML = greenColor.toString(); 
+        }
+        else if (blue_pressed == 1) {
+          blueColor = 255/200 * mouseY;
+          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
+
+          //bluetest.innerHTML = blueColor.toString(); 
+        }
+
+        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+      }, 100);
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div id="page">
+      <div id="Banner">
+        
+        <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+        <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+        
+        <script>
+          var redPot;
+          var greenPot;
+          var BluePot;
+          
+          var svgElm = document.getElementById("svg_circuit"); 
+          svgElm.addEventListener("load",function(){
+          var svgDoc = svgElm.contentDocument;
+
+          svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+            mouseY = evt.clientY;
+          }, false);
+
+          svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+            if (clickedOnce == 0) {
+                  if (red_pressed == 1) {
+                    red_pressed = 0;
+                  }
+                  if (green_pressed == 1) {
+                    green_pressed = 0;
+                  }
+                  if (blue_pressed == 1) {
+                    blue_pressed = 0;
+                  }
+            }
+            clickedOnce = 0;
+          }, false);
+
+          redPot = svgDoc.getElementById("red_pot");
+          redPot.addEventListener("mousedown",function redPressed() {
+            red_pressed = 1;
+            clickedOnce = 1;
+          } , false);
+          redPot.style.cursor = "pointer";
+          
+          greenPot = svgDoc.getElementById("green_pot");
+          greenPot.addEventListener("mousedown",function greenPressed() {
+                green_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          greenPot.style.cursor = "pointer";
+          
+          bluePot = svgDoc.getElementById("blue_pot");
+          bluePot.addEventListener("mousedown",function bluePressed() {
+            blue_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          bluePot.style.cursor = "pointer";
+
+              
+          },false);
+        </script>
+
+       </div>
+
+          <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+        <table class="navbar_table" cellspacing="0">
+          <tr>
+            <td class="navbar_entry">
+              <a href="../index.html">
+            Home
+              </a>
+            </td>
+
+            <td class="navbar_entry">
+              <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+            Projects
+              </a>
+              <ul>
+                <li class="submenu_item"><a href="power_supply.html">Bench Power Supply</a></li>
+      					<li class="submenu_item"><a href="night_vision.html">Night Vision Goggles</a></li>
+                <li class="submenu_item"><a href="desk.html">Motorized Desk</a></li>
+                <li class="submenu_item"><a href="IR_recorder.html">IR Recorder</a></li>
+                <li class="submenu_item"><a href="home_automation_v2.html">Home Automation V2</a></li>
+                <li class="submenu_item"><a href="internet_robot.html">Internet Robot</a></li>
+                <li class="submenu_item"><a href="N64_mod.html">N64 Mod</a></li>
+                <li class="submenu_item"><a href="../projects.html">. . .</a></li>
+              </ul>
+            </td>
+
+            <td class="navbar_entry">
+              <a href="../contact.html">
+            Contact
+              </a>
+            </td>
+
+          </tr>
+        </table>
+        </div>
+
+        <div class="main_content">
+		<h1 id="project_title">Home Automation Projects</h1>
+	
+	<table>
+	  <tr>
+	    <td class="text_td">
+	      <p class="section_title">Overview</p>
+	      <p class="section_text">I've set up a home server with a Rasberry Pi and some PIC microcontrollers that allows me to control a couple different fixtures around the house. The Rasberry Pi sends commands to a PIC microcontroller which can perform several functions. The whole setup has the ability to give the temperature of the house, control several lights, view a webcam feed, and control the TV using an IR transceiver. </p>
+          
+        <p class="section_text">
+          An http server was set up on a Rasberry Pi to serve up the control website, and send commands to an attached PIC microcontroller on a breadboard. The Rasberry Pi is able to communicate with the PIC using UART. This PIC is hooked up to an RF transmitter that allows it to control some remote controlled outlets. I used an RF receiver to capture the RF signals that the remote uses to control the RF outlets and was then able get the PIC to replicate these signals. The PIC is also hooked up to a cheap temperature sensor that outputs an analog voltage that is proportional to temperature. The PIC reads this voltage and sends the value back to the Rasberry Pi which translates it into a temperature value since the PIC can't do floating point arithmetic. A simple webcam is also hooked up to the Rasberry Pi which gives a live feed to the control website. The webcam is also set up to start recording video when it detects motion. This way it acts as a security camera.</p> 
+        <p class="section_text">
+          I also made a separate device that accepts commands through an RF receiver and is able to control one of my TVs in the living room with an IR LED. This device uses another PIC mcrocontroller with preprogrammed IR commands on it to control the TV. The device is also able to record any IR command using an IR receiver and then play it back. It's enclosed in a project box and runs on a 9V battery so that it can be placed out of sight close to the TV.</p>    
+	      
+
+	    </td>
+	    <td>
+	      <a href="picture_viewer.php?img=home_automation_media/website_screenshot&referer=home_automation"><img src="home_automation_media/website_screenshot.jpg" class="main_image"/></a>
+	    </td>
+	  </tr>
+  
+	  <tr>
+	    <td colspan="2">
+	      <p class="section_title">Pictures</p>
+	      <table class="img_table">
+		<tr>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=home_automation_media/Rasberry_Pi_setup&referer=home_automation"><img src="home_automation_media/thumbs/Rasberry_Pi_setup_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+	      <td class="img_td">
+		  <a href="picture_viewer.php?img=home_automation_media/IR_module_front&referer=home_automation"><img src="home_automation_media/thumbs/IR_module_front_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+	      <td class="img_td">
+		  <a href="picture_viewer.php?img=home_automation_media/IR_module_internals&referer=home_automation"><img src="home_automation_media/thumbs/IR_module_internals_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+          <td class="img_td">
+		    <a href="picture_viewer.php?img=home_automation_media/IR_module_internals2&referer=home_automation"><img src="home_automation_media/thumbs/IR_module_internals2_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+          <td class="img_td">
+		    <a href="picture_viewer.php?img=home_automation_media/IR_module_side&referer=home_automation"><img src="home_automation_media/thumbs/IR_module_side_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		</tr>
+        <tr>
+          <td class="img_td">
+		    <a href="picture_viewer.php?img=home_automation_media/webstite_screenshot&referer=home_automation"><img src="home_automation_media/thumbs/website_screenshot_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+        </tr>
+
+	      </table>
+	    </td>
+	  </tr>
+	  
+	  
+	</table>
+      </div>
+
+      <!--footer      -->
+      <div id="footer">
+	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
+	&nbsp &nbsp &nbsp &nbsp Last updated 05/2016
+      </div>
+
+
+        </div>
+
+    </div>
+    </body>
+</html>

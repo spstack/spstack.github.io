@@ -1,0 +1,90 @@
+/*  Styling for the home page */
+
+
+.main_content {
+    padding-top : 5px;
+    padding-left : 5px;
+    min-height : 600px;
+    height : auto;
+    border-left-style : solid;
+    border-left-width : 1px;
+    border-right-style : solid;
+    border-right-width : 1px;
+    font-family : arial;
+}
+
+#intro_text {
+    padding-right : 15px;
+}
+
+#intro_text p {
+    padding-left : 10px;
+    font-size : 20px;
+    text-indent : 4em;
+    line-height : 1.5em;
+    font-style : italic;
+    margin-bottom : 40px;
+}
+
+.main_table {
+    margin-top : 10px;
+    border-spacing : 15px;
+}
+
+.button_panel {
+    width : 28%;
+    padding-left : 10px;
+}
+
+.button_panel h2 {
+    padding-left : 20px;
+}
+
+.button_panel table {
+    width : 100%;
+    border-spacing : 10px;
+}
+
+
+.link_button {
+    padding-top : 0px;
+    margin : 0 auto;
+    border-style : outset;
+    border-width : 4px;
+    text-align : center;
+    width : 75%;  
+    height : 100%;
+    background : #51A673;
+    font-style : bold;
+}
+
+
+.link_button a {
+    padding-top : 15px;
+    padding-bottom : 15px;
+    display : block;
+    text-decoration : none;
+    width : 100%;
+    height : 100%;
+    color : black;
+    font-size : 18px;
+}
+
+.news_feed {
+    padding-left : 8%;
+    vertical-align : top;
+}
+
+.news_feed ul {
+    font-size : 18px;
+    font-family : Serif;
+    color : #555555;
+    line-height : 1.5em;
+    
+}
+
+
+.news_timestamp {
+    font-size : 14px;
+    font-style : italic;
+}

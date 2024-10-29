@@ -1,0 +1,181 @@
+<!-- main_circuit.svg 
+     
+     This is the svg code for the printed circuit board graphic in the banner of the website
+     the functionality is controlled through javascript in the html page
+
+     yeah I did code this manually...it was a pain
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg" id="main_circuit">
+  
+  <path d="M 40 100 L 25 100 L 10 115 L 10 130 L 25 145 L 330 145" style="stroke:#21825B;fill:none; stroke-width:4px" />  
+  
+  <!--  1206 style resistor graphic -->
+  <g>
+    <rect x="330" y="135" height="20" width="10" style="fill:#777777"/>
+    <rect x="360" y="135" height="20" width="10" style="fill:#777777"/>
+    <rect x="335" y="137" height="16" width="30" style="fill:#101010"/>
+    <line x1="336" y1="137" x2="336" y2="153" style="stroke:#999999;stroke-width:2px;"/>
+    <line x1="365" y1="137" x2="365" y2="153" style="stroke:#999999;stroke-width:2px;"/>
+    <text x="337" y="151" style="font-size:16px; fill:#666666;width:auto;height:auto">102</text>
+  </g>
+  <!-- trace from resistor to micro -->
+  <path d="M 370 145 L 700 145" style="stroke:#21825B; stroke-width:4px; fill:none;"/>
+  
+  <!-- traces from sign title to micro -->
+  <path d="M 382 100 L 600 100 L 630 75 L 700 75"  style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <path d="M 382 108 L 606 108 L 634 85 L 700 85" style="stroke:#21825B; stroke-width:4px; fill:none;"/>
+  <path d="M 382 116 L 612 116 L 638 95 L 700 95" style="stroke:#21825B; stroke-width:4px; fill:none;"/>
+
+
+  <!--  (decorative traces and vias)  -->
+  <path d="M 700 125 L 640 125" style="stroke:#21825B; stroke-width:4px; fill:none;"/>  
+  <circle cx="635" cy="125" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>
+
+  <path d="M 745 30 L 745 60" style="stroke:#21825B; stroke-width:4px;fill:none;" />
+  <path d="M 735 60 L 735 55 L 725 45" style="stroke:#21825B; stroke-width:4px;fill:none;" />
+  <circle cx="725" cy="45" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>
+
+  <path d="M 781 135 L 900 135" style="stroke:#21825B; stroke-width:4px;fill:none;" />
+  <g>
+    <rect x="900" y="125" height="20" width="10" style="fill:#777777"/>
+    <rect x="930" y="125" height="20" width="10" style="fill:#777777"/>
+    <rect x="905" y="127" height="16" width="30" style="fill:#5E2605"/>
+    <path d="M 905 127 Q 908 135 905 143 Z" style="stroke:#999999;stroke-width:2px;fill:#999999"/>
+    <path d="M 935 127 Q 932 135 935 143 Z" style="stroke:#999999;stroke-width:2px;fill:#999999"/>
+  </g>  
+  <path d="M 940 135 L1100 135" style="stroke:#21825B; stroke-width:4px;fill:none;"/>
+  <circle cx="1104" cy="135" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>
+
+  <!-- traces below micro -->
+  <path d="M 100 170 L 1100 170" style="stroke:#21825B; stroke-width:4px;fill:none;" />
+  <circle cx="100" cy="170" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+  <circle cx="1100" cy="170" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+  
+  <path d="M 120 180 L 1120 180" style="stroke:#21825B; stroke-width:4px;fill:none;" />
+  <circle cx="120" cy="180" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+  <circle cx="1120" cy="180" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+
+
+  <!-- angle traces above sign -->
+
+  <path d="M 150 50 L 400 50 L 430 75 L 510 75" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <circle cx="150" cy="50" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+  <circle cx="510" cy="75" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+
+  <path d="M 170 40 L 405 40 L 435 65 L 530 65" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <circle cx="170" cy="40" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+  <circle cx="530" cy="65" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+
+
+  <!-- microcontroller portion of the graphic --> 
+  <g id="micro">
+    <rect x="700" y="70" width="80" height="80" style="fill:rgb(40,40,40);stroke:rgb(20,20,20);stroke-width:3px;" id="micro"/>
+    <circle cx="772" cy="78" r="4" style="fill:#555555"/>
+    <line x1="705" y1="69" x2="705" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="715" y1="69" x2="715" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="725" y1="69" x2="725" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="735" y1="69" x2="735" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="745" y1="69" x2="745" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="755" y1="69" x2="755" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="765" y1="69" x2="765" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="775" y1="69" x2="775" y2="60" style="stroke:#AAAAAA;stroke-width:4px;"/>
+
+    <line x1="699" y1="75" x2="690" y2="75" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="85" x2="690" y2="85" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="95" x2="690" y2="95" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="105" x2="690" y2="105" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="115" x2="690" y2="115" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="125" x2="690" y2="125" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="135" x2="690" y2="135" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="699" y1="145" x2="690" y2="145" style="stroke:#AAAAAA;stroke-width:4px;"/>
+
+    <line x1="705" y1="151" x2="705" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="715" y1="151" x2="715" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="725" y1="151" x2="725" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="735" y1="151" x2="735" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="745" y1="151" x2="745" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="755" y1="151" x2="755" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="765" y1="151" x2="765" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="775" y1="151" x2="775" y2="160" style="stroke:#AAAAAA;stroke-width:4px;"/>
+
+    <line x1="781" y1="75" x2="790" y2="75" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="85" x2="790" y2="85" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="95" x2="790" y2="95" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="105" x2="790" y2="105" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="115" x2="790" y2="115" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="125" x2="790" y2="125" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="135" x2="790" y2="135" style="stroke:#AAAAAA;stroke-width:4px;"/>
+    <line x1="781" y1="145" x2="790" y2="145" style="stroke:#AAAAAA;stroke-width:4px;"/>
+  </g>
+
+  
+  <!-- potentiometers -->
+  <rect x="880" y="50" height="44" width="44" style="fill:#222222;stroke:#000000;stroke-width:3px;"/>
+  <g id="red_pot">
+    <circle cx="902" cy="72" r="20" style="fill:#880000; stroke:#666666; stroke-width:2px"/>
+    <line x1="902" y1="72" x2="922" y2="72" style="stroke:#BBBBBB; stroke-width:3px;" id="red_pot_line"/>
+  </g>
+  <line x1="880" y1="55" x2="875" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="924" y1="55" x2="929" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="880" y1="89" x2="875" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="924" y1="89" x2="929" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+
+  <rect x="960" y="50" height="44" width="44" style="fill:#222222;stroke:#000000;stroke-width:3px;"/>
+  <g id="green_pot">
+    <circle cx="982" cy="72" r="20" style="fill:#008800; stroke:#666666; stroke-width:2px"/>
+    <line x1="982" y1="72" x2="1002" y2="72" style="stroke:#BBBBBB; stroke-width:3px;" id="green_pot_line"/>
+  </g>
+  <line x1="960" y1="55" x2="955" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="1004" y1="55" x2="1009" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="960" y1="89" x2="955" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="1004" y1="89" x2="1009" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+
+  <rect x="1040" y="50" height="44" width="44" style="fill:#222222;stroke:#000000;stroke-width:3px;"/>
+  <g id="blue_pot">
+    <circle cx="1062" cy="72" r="20" style="fill:#000088; stroke:#666666; stroke-width:2px"/>
+    <line x1="1062" y1="72" x2="1082" y2="72" style="stroke:#BBBBBB; stroke-width:3px;" id="blue_pot_line"/>
+  </g>
+  <line x1="1040" y1="55" x2="1035" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="1084" y1="55" x2="1089" y2="55" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="1040" y1="89" x2="1035" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+  <line x1="1084" y1="89" x2="1089" y2="89" style="stroke:#AAAAAA; stroke-width:4px;"/>
+
+
+  <!-- traces from pots to micro -->
+  <path d="M 875 89 L 860 89 L 856 95 L 790 95" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <path d="M 929 55 L 939 45 L 939 30" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+
+  <path d="M 955 89 L 939 105 L 790 105" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <path d="M 1009 55 L 1019 45 L 1019 30" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+
+  <path d="M 1035 89 L 1009 115 L 790 115" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  <path d="M 1089 55 L 1099 45 L 1099 30" style="stroke:#21825B; stroke-width:4px; fill:none;"/> 
+  
+
+  <!-- 'power' trace -->
+  <path d="M 500 30 L 1200 30" style="stroke:#21825B; stroke-width:10px;fill:none;" />
+  <circle cx="1200" cy="30" r="5" style="stroke:#707070; stroke-width:6px; fill:#111111;"/>  
+  <circle cx="500" cy="30" r="5" style="stroke:#707070; stroke-width:6px; fill:#111111;"/>  
+
+
+
+
+
+
+   
+  <!-- 
+  Silkscreen writing (meh this kinda looks horrible... so I'm not gonna use it)
+  <text x="50" y="50" style="font-size:20px; fill:#777777;">Example!</text>
+
+  trace:
+  <path d="__" style="stroke:#21825B; stroke-width:10px;fill:none;" />
+
+  via:
+  <circle cx="__" cy="__" r="4" style="stroke:#707070; stroke-width:4px; fill:#111111;"/>  
+
+
+  -->
+
+
+</svg>

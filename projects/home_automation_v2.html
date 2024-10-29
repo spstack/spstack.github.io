@@ -1,0 +1,321 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+      var blue_pressed = 0;
+      var green_pressed = 0;
+      var red_pressed = 0;
+
+      var redColor = 255;
+      var greenColor = 255;
+      var blueColor = 255;
+
+      var mouseY = 0;
+      
+      var redPotLine;
+      var greenPotLine;
+      var bluePotLine;
+
+      function unPressButtons() {
+        if (red_pressed == 1) {
+          red_pressed = 0;
+        }
+        else if (green_pressed == 1) {
+          green_pressed = 0;
+        }
+        else if (blue_pressed == 1) {
+          blue_pressed = 0;
+        }
+      }
+
+      function mouseMoved(evt) {
+        mouseY = evt.clientY;
+      }
+
+      setInterval(function monitorMouse() {
+        var redtest = document.getElementById("redtest");
+        var greentest = document.getElementById("greentest");
+        var bluetest = document.getElementById("bluetest");
+
+        if (red_pressed == 1) {
+          redColor = 255/200 * mouseY;
+          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
+          
+          //redtest.innerHTML = redColor.toString(); 
+        }
+        else if (green_pressed == 1) {
+          greenColor = 255/200 * mouseY;
+          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
+
+          //greentest.innerHTML = greenColor.toString(); 
+        }
+        else if (blue_pressed == 1) {
+          blueColor = 255/200 * mouseY;
+          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
+
+          //bluetest.innerHTML = blueColor.toString(); 
+        }
+
+        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+      }, 100);
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div id="page">
+      <div id="Banner">
+        
+        <p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+        <object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+        
+        <script>
+          var redPot;
+          var greenPot;
+          var BluePot;
+          
+          var svgElm = document.getElementById("svg_circuit"); 
+          svgElm.addEventListener("load",function(){
+          var svgDoc = svgElm.contentDocument;
+
+          svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+            mouseY = evt.clientY;
+          }, false);
+
+          svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+            if (clickedOnce == 0) {
+                  if (red_pressed == 1) {
+                    red_pressed = 0;
+                  }
+                  if (green_pressed == 1) {
+                    green_pressed = 0;
+                  }
+                  if (blue_pressed == 1) {
+                    blue_pressed = 0;
+                  }
+            }
+            clickedOnce = 0;
+          }, false);
+
+          redPot = svgDoc.getElementById("red_pot");
+          redPot.addEventListener("mousedown",function redPressed() {
+            red_pressed = 1;
+            clickedOnce = 1;
+          } , false);
+          redPot.style.cursor = "pointer";
+          
+          greenPot = svgDoc.getElementById("green_pot");
+          greenPot.addEventListener("mousedown",function greenPressed() {
+                green_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          greenPot.style.cursor = "pointer";
+          
+          bluePot = svgDoc.getElementById("blue_pot");
+          bluePot.addEventListener("mousedown",function bluePressed() {
+            blue_pressed = 1;
+            clickedOnce = 1;
+          },false);
+          bluePot.style.cursor = "pointer";
+
+              
+          },false);
+        </script>
+
+       </div>
+
+          <!-- TEST the potentiometer values
+          Red Pressed: <p id="redtest"></p>
+          Green Pressed: <p id="greentest"></p>
+          Blue Pressed: <p id="bluetest"></p>
+          -->
+
+        <div class="navbar">
+        <table class="navbar_table" cellspacing="0">
+          <tr>
+            <td class="navbar_entry">
+              <a href="../index.html">
+            Home
+              </a>
+            </td>
+            
+            <td class="navbar_entry">
+              <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+            Projects
+              </a>
+              <ul>
+                <li class="submenu_item"><a href="power_supply.html">Bench Power Supply</a></li>
+                <li class="submenu_item"><a href="pcb_clock.html">PCB Alarm Clock</a></li>
+                <li class="submenu_item"><a href="night_vision.html">Night Vision Goggles</a></li>
+                <li class="submenu_item"><a href="desk.html">Motorized Desk</a></li>
+                <li class="submenu_item"><a href="IR_recorder.html">IR Recorder</a></li>
+                <li class="submenu_item"><a href="home_automation_v2.html">Home Automation V2</a></li>
+                <li class="submenu_item"><a href="internet_robot.html">Internet Robot</a></li>
+                <li class="submenu_item"><a href="N64_mod.html">N64 Mod</a></li>
+                <li class="submenu_item"><a href="../projects.html">. . .</a></li>
+              </ul>
+            </td>
+
+            <td class="navbar_entry">
+              <a href="../contact.html">
+            Contact
+              </a>
+            </td>
+
+          </tr>
+        </table>
+        </div>
+
+        <div class="main_content">
+		<h1 id="project_title">Home Automation Projects V2!</h1>
+	
+	<table>
+	  <tr>
+	    <td class="text_td">
+	      <p class="section_title">Overview</p>
+		  <p class="section_text">I love the idea of home automation, and I wanted to make a system that was easily extensible, and able to potentially interact with lots
+			of different things around the house. My first attempt at some simple home automation did a couple things, but it felt a bit hacked together. This time around,
+			I actually made it a little more modular, and created custom PCBs and enclosures for the devices. It still uses a rasbery pi as the main control hub in conjunction with a 
+			PIC like last time. The main difference here, is I've set up a django powered website to host the control site and keep a database of events and statuses for
+			different peripherals. The other main difference is the addition of a zigbee network. I created custom 'remote modules' that connect to the control hub through
+			the zigbee protocol. This was cheaper and lower power than using something like wifi to communicate back to the control hub. Right now the remote modules have rechargeable batteries
+			that will last for a month or so before needing to be recharged. They can collect temperature and humidity in whichever room they're in, but they can be programmed to 
+			perform lots of other functions as well. 
+			</p>
+          
+		<p class="section_title">Hardware</p>
+		<p class="section_text">
+		The base station consists of a rasberry pi 2 and a second custom PCB that includes a PIC microcontroller, a zigbee radio module, a generic 434MHz radio module, a blueooth module, and
+		a temperature sensor. All of this sits inside of a basic black project box. 
+		<br/>
+		<br/>
+			<table>
+				<tr>
+						<td>		
+							<a href="picture_viewer.php?img=home_automation_v2_media/control_hub_external&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/control_hub_external.jpg" class="main_image"/></a>
+						</td>
+						<td>
+							<a href="picture_viewer.php?img=home_automation_v2_media/control_hub_internals_0&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/control_hub_internals_0.jpg" class="main_image"/></a>
+						</td>
+				</tr>
+			</table>
+		</p> 
+
+		<p class="section_text">
+		The whole thing is powered through a micro USB cable. That cable is routed straight to the Pi, and the supporting board is powered by the 5V pin on the Pi. The Pi communicates with the
+		PIC through UART, just as before. The PIC either receives commands/data from remote modules via the zigbee radio, or from the Pi which it can then service itself or forward on to the intended 
+		recipient. The zigbee module is made by Xbee, and is pretty easy to use. The reason I used the Xbee/Zigbee modules was that I could make 
+		really low power remote peripherals, and they would be simpler than if I had to use wifi or something similar. All of the zigbee modules together create a mesh network, so you can use 'router' modules
+		to forward packets to peripherals that may be out of range from the destination radio module. The board also has a bluetooth module on it, but I haven't actually done anything with that yet. 
+		Maybe someday...The board also includes a basic temperature sensor to monitor the temperature inside the box. I included the <a href="https://www.sparkfun.com/products/retired/8946">434MHz radio module</a> 
+		because that's what some of my remote control outlets use. I bought <a href="http://www.amazon.com/Woods-13569-Wireless-Control-Outlets/dp/B003ZTWYXY">these outlets</a> from amazon, 
+		and was able to imitate the signals that the remote sends to be able to control the outlets through this system. I have 2 lamps in my apartment hooked up to these outlets that I can control
+		from the website. I've attached the schematics and board file for the control hub below if you're interested in more details.
+		</p>
+		
+		<p class="section_text">
+		To go along with the control hub, I also created several (what I'm calling) remote modules. These are small boxes that can communicate with the control hub through the zigbee network
+		and	monitor temperature and humidity wherever they are placed. I'm hoping to add more functionality to them, but for now, they just monitor temperature and humidity in various rooms. 
+		So far I've assembled 3 of them, but I have enough PCBs and parts to make 5 total.
+			<br/>
+			<br/>
+			<table>
+				<tr>
+						<td>		
+							<a href="picture_viewer.php?img=home_automation_v2_media/remote_module_external_1&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/remote_module_external_1.jpg" class="main_image"/></a>
+						</td>
+						<td>
+							<a href="picture_viewer.php?img=home_automation_v2_media/remote_module_internals_1&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/remote_module_internals_1.jpg" class="main_image"/></a>
+						</td>
+				</tr>
+			</table>
+		</p>
+		<p class="section_text">
+		The 2 main features of the remote modules are a <a href="https://www.digikey.com/product-detail/en/honeywell-sensing-and-productivity-solutions/HIH6130-021-001/480-3651-1-ND/2704704"/>
+			temperature/humidity sensor</a> and a FET that can switch some kind of load remotely. I plan to use this FET to switch an IR LED which will control the TVs in my apartment. 
+		The remote modules can be powered by a rechargable LiIon battery or a micro USB connection. When in battery mode, the USB port will charge the battery using an integrated charge
+		controller. The battery life is pretty good since the PIC and XBee spend most of their time in sleep mode. They usually last about a month before needing to be recharged. The schematics
+		and board file for the remote module are also attached below.
+
+		<p class="section_title">Software</p>
+		<p class="section_text">
+		Just like on the little internet controlled robot, the rasberry pi 2 in the control hub is running an ARM version of Arch Linux. Instead of just hosting a normal website on it like last time, I 
+		decided to use a <a href="https://www.djangoproject.com/">django</a> site that includes an actual database. The main reason was that I wanted to maintain a bunch of information
+		in a database (like temperature history for example), and Django was a great way to incorporate that and a control website into one. In with the Django code for the database and website,
+		I have the code that coordinates communication with the PIC on the other PCB and by extension, the remote modules. It can initiate a command to the other board (like turning on lights), or
+		receive data from the remote modules (like temperature/humidity). The actual django website has 3 main pages right now. One main page that has a summary of all the stuff going on in the house,
+		 and one for temperature and humidity each. The temperature and humidity pages allow you to see history of temperatures in each room. Each room corresponds to data from one remote module. The 
+		data from the modules is stored in the Django database, and displayed as both a graph and table in the website. You can choose how far back in the past you want the graph to display data from.
+			<br/>
+			<br/>
+			<table>
+				<tr>
+						<td>		
+							<a href="picture_viewer.php?img=home_automation_v2_media/temperature_page_1&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/temperature_page_1.jpg" class="main_image"/></a>
+						</td>
+						<td>
+							<a href="picture_viewer.php?img=home_automation_v2_media/humidity_page_1&referer=home_automation_v2"><img class="section_image" src="home_automation_v2_media/humidity_page_1.jpg" class="main_image"/></a>
+						</td>
+				</tr>
+			</table>
+
+		</p>
+
+		<p class="section_text">
+		The code for the PIC on the control hub has to control communication with the remote modules through the XBee as well as communication with the Pi. I have a simple packet format
+		that I'm using for communication between all of these devices. Basically there is a field for the intended destination of the packet, and one for the type of packet. Then depending
+		on the type, the actual payload data takes variable formats. For example, a temperature packet will have a 2 byte number in the payload that can be converted into an accurate temperature, but
+		a light control packet has one byte for the light id, and another for brightness of that light. I've put all of the code in a zip file below, so you can look at it for more details.	
+		</p>
+
+		<p class="section_title">Code/Schematics for this project</p>
+		<p class="section_text"><a id="code_link" href="home_automation_v2_media/v2_automation_code.zip">Download ZIP file</a></p>
+
+		</td>
+	    <td class="main_image">
+	      <a href="picture_viewer.php?img=home_automation_v2_media/home_page&referer=home_automation_v2"><img src="home_automation_v2_media/home_page.jpg" class="main_image"/></a>
+	    </td>
+	  </tr>
+  
+	  <tr>
+	    <td colspan="2">
+	      <p class="section_title">More Pictures</p>
+	      <table class="img_table">
+			<tr>
+			  <td class="img_td">
+				<a href="picture_viewer.php?img=home_automation_v2_media/remote_module_internals_2&referer=home_automation_v2"><img src="home_automation_v2_media/thumbs/remote_module_internals_2_thumb.jpg" class="img_thumb"/></a>
+			  </td>
+
+			  <td class="img_td">
+				<a href="picture_viewer.php?img=home_automation_v2_media/remote_module_external_2&referer=home_automation_v2"><img src="home_automation_v2_media/thumbs/remote_module_external_2_thumb.jpg" class="img_thumb"/></a>
+			  </td>
+			</tr>
+	      </table>
+	    </td>
+	  </tr>
+	  
+	  
+	</table>
+      </div>
+
+      <!--footer      -->
+      <div id="footer">
+	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
+	&nbsp &nbsp &nbsp &nbsp Last updated 05/2016
+      </div>
+
+
+        </div>
+
+    </div>
+    </body>
+</html>

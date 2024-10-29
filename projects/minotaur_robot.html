@@ -1,0 +1,302 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
+
+    <title>Scott Stack's Website</title>
+
+    <script type="text/javascript">
+      var blue_pressed = 0;
+      var green_pressed = 0;
+      var red_pressed = 0;
+
+      var redColor = 255;
+      var greenColor = 255;
+      var blueColor = 255;
+
+      var mouseY = 0;
+      
+      var redPotLine;
+      var greenPotLine;
+      var bluePotLine;
+
+      function unPressButtons() {
+        if (red_pressed == 1) {
+          red_pressed = 0;
+        }
+        else if (green_pressed == 1) {
+          green_pressed = 0;
+        }
+        else if (blue_pressed == 1) {
+          blue_pressed = 0;
+        }
+      }
+
+      function mouseMoved(evt) {
+        mouseY = evt.clientY;
+      }
+
+      setInterval(function monitorMouse() {
+        var redtest = document.getElementById("redtest");
+        var greentest = document.getElementById("greentest");
+        var bluetest = document.getElementById("bluetest");
+
+        if (red_pressed == 1) {
+          redColor = 255/200 * mouseY;
+          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
+          
+          //redtest.innerHTML = redColor.toString(); 
+        }
+        else if (green_pressed == 1) {
+          greenColor = 255/200 * mouseY;
+          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
+
+          //greentest.innerHTML = greenColor.toString(); 
+        }
+        else if (blue_pressed == 1) {
+          blueColor = 255/200 * mouseY;
+          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
+
+          //bluetest.innerHTML = blueColor.toString(); 
+        }
+
+        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+
+      }, 100);
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div id="page">
+      <div id="Banner">
+	
+	<p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
+	<object data="../main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
+	
+	<script>
+	  var redPot;
+	  var greenPot;
+	  var BluePot;
+	  
+	  var svgElm = document.getElementById("svg_circuit"); 
+	  svgElm.addEventListener("load",function(){
+	  var svgDoc = svgElm.contentDocument;
+	  svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
+	    mouseY = evt.clientY;
+	  }, false);
+
+	  svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
+	    if (clickedOnce == 0) {
+              if (red_pressed == 1) {
+                red_pressed = 0;
+              }
+              if (green_pressed == 1) {
+                green_pressed = 0;
+              }
+              if (blue_pressed == 1) {
+                blue_pressed = 0;
+              }
+	    }
+	    clickedOnce = 0;
+	  }, false);
+
+	  redPot = svgDoc.getElementById("red_pot");
+	  redPot.addEventListener("mousedown",function redPressed() {
+	    red_pressed = 1;
+	    clickedOnce = 1;
+	  } , false);
+	  redPot.style.cursor = "pointer";
+	  
+	  greenPot = svgDoc.getElementById("green_pot");
+	  greenPot.addEventListener("mousedown",function greenPressed() {
+    	    green_pressed = 1;
+	    clickedOnce = 1;
+	  },false);
+	  greenPot.style.cursor = "pointer";
+	  
+	  bluePot = svgDoc.getElementById("blue_pot");
+	  bluePot.addEventListener("mousedown",function bluePressed() {
+	    blue_pressed = 1;
+	    clickedOnce = 1;
+	  },false);
+	  bluePot.style.cursor = "pointer";
+
+          
+	  },false);
+	</script>
+
+      </div>
+
+      <!-- TEST the potentiometer values
+      Red Pressed: <p id="redtest"></p>
+      Green Pressed: <p id="greentest"></p>
+      Blue Pressed: <p id="bluetest"></p>
+      -->
+
+      <div class="navbar">
+	<table class="navbar_table" cellspacing="0">
+	  <tr>
+	    <td class="navbar_entry">
+	      <a href="../index.html">
+		Home
+	      </a>
+	    </td>
+
+	    <td class="navbar_entry">
+	      <a href="../projects.html" style="color:#FFFFFF;background:#006561;">
+		Projects
+	      </a>
+	      <ul>
+                <li class="submenu_item"><a href="power_supply.html">Bench Power Supply</a></li>
+                <li class="submenu_item"><a href="pcb_clock.html">PCB Alarm Clock</a></li>
+				<li class="submenu_item"><a href="night_vision.html">Night Vision Goggles</a></li>
+                <li class="submenu_item"><a href="desk.html">Motorized Desk</a></li>
+                <li class="submenu_item"><a href="IR_recorder.html">IR Recorder</a></li>
+                <li class="submenu_item"><a href="home_automation_v2.html">Home Automation V2</a></li>
+                <li class="submenu_item"><a href="internet_robot.html">Internet Robot</a></li>
+                <li class="submenu_item"><a href="N64_mod.html">N64 Mod</a></li>
+                <li class="submenu_item"><a href="../projects.html">. . .</a></li>
+	      </ul>
+	    </td>
+
+	    <td class="navbar_entry">
+	      <a href="../contact.html">
+		Contact
+	      </a>
+	    </td>
+
+	  </tr>
+	</table>
+      </div>
+
+
+      <div class="main_content">
+	<h1 id="project_title">Minotaur Home Security Robot</h1>
+	
+	<table>
+	  <tr>
+	    <td>
+
+	      <p class="section_title">Overview</p>
+	      <p class="section_text">This robot was designed and built as a senior design project at Purdue University. The robot acts as a security system for the home or office. The user can navigate to a webpage and manually control the robot through the internet with the help of a live video feed. Alternatively, the user can put the robot into a patrol mode where it will navigate through the building autonomously and search for intruders. It accomplishes this with the help of a Microsoft Kinect device which aids in both navigation and human detection. The Kinect senses depth and can, therefore, tell the difference between an actual human being and an inanimate object or picture of a person. If an intruder is detected, the robot will take a picture and email it to the user.</p>
+		  <p class="section_text">The robot uses an Intel Atom board for WiFi Communication, video compression, and Kinect data processing. This Atom Board communicates with a small microcontroller on a custom printed circuit board which controls the motors on the robot in addition to several other sensors on board. My role in this project was to design all of the hardware along with one of my other teammates and also to write all of the microcontroller software for the robot. I designed one of the two custom PCBs on the robot which contained the microcontroller, H-bridge circuit, and several switching voltage regulators among other things. I also wrote all of the code for the microcontroller in embedded C. Finally, I aided in the physical construction of the robot. This included soldering all of the electronic components and constructing the packaging for the robot.
+		  
+	      <br/>
+	      <br/>
+	      <br/>
+
+		  <iframe width="560" height="315" src="https://www.youtube.com/embed/J_obNJ1-8HI" frameborder="0" allowfullscreen></iframe>
+		  </p>
+
+	      
+
+	    </td>
+	    <td class="main_image">
+	      <a href="picture_viewer.php?img=minotaur_robot_media/MINOTAUR_FINAL_PACKAGING&referer=minotaur_robot"><img src="../media/MINOTAUR_FINAL_PACKAGING.jpg" class="main_image"/></a>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <p class="section_title">Project Documents</p>
+	      <p class="section_text"><a href="minotaur_robot_media/minotaur_robot_final_report.pdf">Final Project Report</a> - Contains lots of detailed information about the design and results of the project.</p>
+	      
+	    </td>
+	  </tr>
+	  
+	  <tr>
+	    <td colspan="2">
+	      <p class="section_title">Pictures</p>
+	      <table class="img_table">
+		<tr>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/team&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/team_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/chassis_switches&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/chassis_switches_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/FINAL_BATTERY_PCB&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/FINAL_BATTERY_PCB_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/FINAL_MAIN_PCB&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/FINAL_MAIN_PCB_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/H-Bridge_Test1&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/H-Bridge_Test1_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		</tr>
+		<tr>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/PCBs1&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/PCBs1_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/populated PCBs&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/populated PCBs_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/minotaur_robot_block_diagram&referer=minotaur_robot"><img src="minotaur_robot_media/minotaur_robot_block_diagram.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/Power_BurnIn&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/Power_BurnIn_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/internals1&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/internals1_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/bench1&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/bench1_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/neil&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/neil_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/packaging2&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/packaging2_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/power_test&referer=minotaur_robot"><img src="minotaur_robot_media/power_test.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/project_poster&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/project_poster_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		</tr>
+
+
+<tr>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/robot_and_atom&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/robot_and_atom_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/robot_shell1&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/robot_shell1_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/robot_shell2&referer=minotaur_robot"><img src="minotaur_robot_media/thumbs/robot_shell2_thumb.jpg" class="img_thumb"/></a>
+		  </td>
+		  <td class="img_td">
+		    <a href="picture_viewer.php?img=minotaur_robot_media/power_test&referer=minotaur_robot"><img src="minotaur_robot_media/power_test.jpg" class="img_thumb"/></a>
+		  </td>
+		  
+		</tr>
+
+
+	      </table>
+	    </td>
+	  </tr>
+	  
+	  
+	</table>
+      </div>
+
+      <!--footer      -->
+      <div id="footer">
+	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
+	&nbsp &nbsp &nbsp &nbsp Last updated 08/2013
+      </div>
+
+    </div>
+  </body>
+</html>
