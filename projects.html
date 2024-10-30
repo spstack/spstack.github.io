@@ -1,335 +1,172 @@
-<html>
+---
+---
 
+<html>
   <head>
     <link rel="stylesheet" type="text/css" href="main.css"/>
     <link rel="stylesheet" type="text/css" href="projects.css"/>
 
     <title>Scott Stack's Website</title>
 
-    <script type="text/javascript">
-      var blue_pressed = 0;
-      var green_pressed = 0;
-      var red_pressed = 0;
-
-      var redColor = 255;
-      var greenColor = 255;
-      var blueColor = 255;
-
-      var mouseY = 0;
-      
-      var redPotLine;
-      var greenPotLine;
-      var bluePotLine;
-
-      function unPressButtons() {
-        if (red_pressed == 1) {
-          red_pressed = 0;
-        }
-        else if (green_pressed == 1) {
-          green_pressed = 0;
-        }
-        else if (blue_pressed == 1) {
-          blue_pressed = 0;
-        }
-      }
-
-      function mouseMoved(evt) {
-        mouseY = evt.clientY;
-      }
-
-      setInterval(function monitorMouse() {
-        var redtest = document.getElementById("redtest");
-        var greentest = document.getElementById("greentest");
-        var bluetest = document.getElementById("bluetest");
-
-        if (red_pressed == 1) {
-          redColor = 255/200 * mouseY;
-          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
-          
-          //redtest.innerHTML = redColor.toString(); 
-        }
-        else if (green_pressed == 1) {
-          greenColor = 255/200 * mouseY;
-          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
-
-          //greentest.innerHTML = greenColor.toString(); 
-        }
-        else if (blue_pressed == 1) {
-          blueColor = 255/200 * mouseY;
-          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
-
-          //bluetest.innerHTML = blueColor.toString(); 
-        }
-
-        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
-
-      }, 100);
-
-
-    </script>
-
   </head>
-
 
   <body>
     <div id="page">
-      <div id="Banner">
-	
-	<p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
-	<object data="main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
-	
-	<script>
-	  var redPot;
-	  var greenPot;
-	  var BluePot;
-	  
-	  var svgElm = document.getElementById("svg_circuit"); 
-	  svgElm.addEventListener("load",function(){
-	  var svgDoc = svgElm.contentDocument;
+	{% include header.html %}
+    
+	<div class="main_content">
+    <table id="projects_table">
 
-	  svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
-	    mouseY = evt.clientY;
-	  }, false);
-
-	  svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
-	    if (clickedOnce == 0) {
-              if (red_pressed == 1) {
-                red_pressed = 0;
-              }
-              if (green_pressed == 1) {
-                green_pressed = 0;
-              }
-              if (blue_pressed == 1) {
-                blue_pressed = 0;
-              }
-	    }
-	    clickedOnce = 0;
-	  }, false);
-
-	  redPot = svgDoc.getElementById("red_pot");
-	  redPot.addEventListener("mousedown",function redPressed() {
-	    red_pressed = 1;
-	    clickedOnce = 1;
-	  } , false);
-	  redPot.style.cursor = "pointer";
-	  
-	  greenPot = svgDoc.getElementById("green_pot");
-	  greenPot.addEventListener("mousedown",function greenPressed() {
-    	    green_pressed = 1;
-	    clickedOnce = 1;
-	  },false);
-	  greenPot.style.cursor = "pointer";
-	  
-	  bluePot = svgDoc.getElementById("blue_pot");
-	  bluePot.addEventListener("mousedown",function bluePressed() {
-	    blue_pressed = 1;
-	    clickedOnce = 1;
-	  },false);
-	  bluePot.style.cursor = "pointer";
-          
-	  },false);
-	</script>
-
-      </div>
-
-      <!-- TEST the potentiometer values
-      Red Pressed: <p id="redtest"></p>
-      Green Pressed: <p id="greentest"></p>
-      Blue Pressed: <p id="bluetest"></p>
-      -->
-
-      <div class="navbar">
-	<table class="navbar_table" cellspacing="0">
-	  <tr>
-	    <td class="navbar_entry">
-	      <a href="./index.html">
-		Home
-	      </a>
-	    </td>
-
-	    <td class="navbar_entry">
-	      <a href="./projects.html" style="color:#FFFFFF;background:#006561;">
-		Projects
-	      </a>
-	      <ul>
-						<li class="submenu_item"><a href="projects/power_supply.html">Bench Power Supply</a></li>
-	          <li class="submenu_item"><a href="projects/pcb_clock.html">PCB Alarm Clock</a></li>
-	          <li class="submenu_item"><a href="projects/night_vision.html">Night Vision Goggles</a></li>
-	          <li class="submenu_item"><a href="projects/desk.html">Motorized Desk</a></li>
-	          <li class="submenu_item"><a href="projects/IR_recorder.html">IR Recorder</a></li>
-						<li class="submenu_item"><a href="projects/home_automation_v2.html">Home Automation V2</a></li>
-						<li class="submenu_item"><a href="projects/internet_robot.html">Internet Robot</a></li>
-						<li class="submenu_item"><a href="projects/N64_mod.html">N64 Mod</a></li>
-	          <li class="submenu_item"><a href="projects.html">. . .</a></li>
-	      </ul>
-	    </td>
-
-	    <td class="navbar_entry">
-	      <a href="./contact.html">
-		Contact
-	      </a>
-	    </td>
-
-	  </tr>
-	</table>
-      </div>
-
-      <div class="main_content">
-	<table id="projects_table">
-
-	<!-- Lab Power Supply -->
-	<tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/power_supply.html">Lab Bench Power Supply</a>
-		  <p class="project_description">I've wished that I had a bench power supply for a while now, but just never got around to buying one. So instead of 
-				spending $80 on a decent one like a reasonable person, I decided to spend months of my time and a lot more money making one :) It can supply anywhere
-				from around 0.7V to 27V at 3A and has an adjustable current limit. I thought it would be cool to put it in a transparent case, so I custom made the enclosure
-				out of quarter inch acrylic. It also has blue and red LEDs whose brightness depend on the voltage and current respectively. I had a lot of fun
-				designing this as it's entirely hardware with no software, and I haven't done anything like it before.</p>
-	    </td>
-	    <td>
-	      <a href="projects/power_supply.html"><img class="project_image" src="projects/power_supply_media/thumbnails/finished_power_supply_thumb.jpg"/></a>
-	    </td>
-	</tr>
+    <!-- Lab Power Supply -->
+    <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/power_supply.html">Lab Bench Power Supply</a>
+          <p class="project_description">I've wished that I had a bench power supply for a while now, but just never got around to buying one. So instead of 
+                spending $80 on a decent one like a reasonable person, I decided to spend months of my time and a lot more money making one :) It can supply anywhere
+                from around 0.7V to 27V at 3A and has an adjustable current limit. I thought it would be cool to put it in a transparent case, so I custom made the enclosure
+                out of quarter inch acrylic. It also has blue and red LEDs whose brightness depend on the voltage and current respectively. I had a lot of fun
+                designing this as it's entirely hardware with no software, and I haven't done anything like it before.</p>
+        </td>
+        <td>
+          <a href="projects/power_supply.html"><img class="project_image" src="projects/power_supply_media/thumbnails/finished_power_supply_thumb.jpg"/></a>
+        </td>
+    </tr>
 
 
-	<!-- Circuit Board Clock -->
-	<tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/pcb_clock.html">Circuit Board Alarm Clock</a>
-		  <p class="project_description">For this project, I made an alarm clock that uses a printed circuit board as the digital clock face.
-				I designed and made pretty much every component of this project from scratch, so it took me quite a while to complete. I'm pretty
-				excited about how it turned out though. The clock has a mountain scene design etched into the metal of the PCB and uses RGB backlighting
-				to illuminate it from behind with colorschemes based on the time of day. The PCB has no soldermask by design, so that it's sort of transparent
-				to allow both the light from the backlighting and the digital clock digits to shine through.
-				It has alarm functionality with a built in speaker, and has a snooze button which is a very important feature for me :)
-		  </p>
-	    </td>
-	    <td>
-	      <a href="projects/pcb_clock.html"><img class="project_image" src="projects/pcb_clock_media/pcb_clock_title.jpg"/></a>
-	    </td>
-	</tr>
+    <!-- Circuit Board Clock -->
+    <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/pcb_clock.html">Circuit Board Alarm Clock</a>
+          <p class="project_description">For this project, I made an alarm clock that uses a printed circuit board as the digital clock face.
+                I designed and made pretty much every component of this project from scratch, so it took me quite a while to complete. I'm pretty
+                excited about how it turned out though. The clock has a mountain scene design etched into the metal of the PCB and uses RGB backlighting
+                to illuminate it from behind with colorschemes based on the time of day. The PCB has no soldermask by design, so that it's sort of transparent
+                to allow both the light from the backlighting and the digital clock digits to shine through.
+                It has alarm functionality with a built in speaker, and has a snooze button which is a very important feature for me :)
+          </p>
+        </td>
+        <td>
+          <a href="projects/pcb_clock.html"><img class="project_image" src="projects/pcb_clock_media/pcb_clock_title.jpg"/></a>
+        </td>
+    </tr>
 
-	<!-- Night vision goggles -->
-	<tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/night_vision.html">Night Vision Goggles</a>
-		  <p class="project_description">I created a set of night vision goggles using google cardboard, an old phone, and some bright IR LEDs. 
-		  </p>
-	    </td>
-	    <td>
-	      <a href="projects/night_vision.html"><img class="project_image" src="projects\night_vision_media/nv_goggles.jpg""/></a>
-	    </td>
-	</tr>
-
-
-	<!-- Motorized desk -->
-	<tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/desk.html">Motorized Sit-Stand Desk</a>
-		  <p class="project_description">Upgraded my super sweet Ikea sit-stand desk! The desk used to have a hand crank to raise and lower it, so I replaced the hand crank with a couple of motors to make it automatic. I'm pretty happy with the way it turned out.  
-		  </p>
-	    </td>
-	    <td>
-	      <a href="projects/desk.html"><img class="project_image" src="projects\desk_media\desk_1.jpg""/></a>
-	    </td>
-	</tr>
-
-	<!-- Motorized desk -->
-	<tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/IR_recorder.html">IR Remote Recorder</a>
-		  <p class="project_description">This little device will record an IR command from any TV remote and play it back. Not incredibly useful, but it was fun to make.
-		  </p>
-	    </td>
-	    <td>
-	      <a href="projects/IR_recorder.html"><img class="project_image" src="projects\IR_recorder_media\IR_remote_recorder_1.jpg""/></a>
-	    </td>
-	</tr>
+    <!-- Night vision goggles -->
+    <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/night_vision.html">Night Vision Goggles</a>
+          <p class="project_description">I created a set of night vision goggles using google cardboard, an old phone, and some bright IR LEDs. 
+          </p>
+        </td>
+        <td>
+          <a href="projects/night_vision.html"><img class="project_image" src="projects\night_vision_media/nv_goggles.jpg""/></a>
+        </td>
+    </tr>
 
 
-	  <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/home_automation_v2.html">Home Automation V2!</a>
-		  <p class="project_description">I made a whole bunch of improvements to the original home automation stuff I did. This time around I made custom PCBs and enclosures for both
-		  the control hub and remote modules. The whole system records temperature and humidity in several different rooms, and can provide graphs of past temperature/humidity. It can control lights, and it will eventually be able to control all of the TVs in the apartment.</p>
-	    </td>
-	    <td>
-	      <a href="projects/home_automation_v2.html"><img class="project_image" src="projects/home_automation_v2_media/home_page.jpg"/></a>
-	    </td>
-	  </tr>
+    <!-- Motorized desk -->
+    <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/desk.html">Motorized Sit-Stand Desk</a>
+          <p class="project_description">Upgraded my super sweet Ikea sit-stand desk! The desk used to have a hand crank to raise and lower it, so I replaced the hand crank with a couple of motors to make it automatic. I'm pretty happy with the way it turned out.  
+          </p>
+        </td>
+        <td>
+          <a href="projects/desk.html"><img class="project_image" src="projects\desk_media\desk_1.jpg""/></a>
+        </td>
+    </tr>
+
+    <!-- Motorized desk -->
+    <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/IR_recorder.html">IR Remote Recorder</a>
+          <p class="project_description">This little device will record an IR command from any TV remote and play it back. Not incredibly useful, but it was fun to make.
+          </p>
+        </td>
+        <td>
+          <a href="projects/IR_recorder.html"><img class="project_image" src="projects\IR_recorder_media\IR_remote_recorder_1.jpg""/></a>
+        </td>
+    </tr>
 
 
       <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/internet_robot.html">Internet Controlled Robot</a>
-	      <p class="project_description">I made a small robot that is capable of being controlled through the internet via an android app or web browser. The robot provides a live POV video feed to the user who can drive the robot in real time. The robot uses an onboard Rasberry Pi to recieve control commands and serve a video stream from the attached camera. This project was really a smaller and simpler version of the 'Minotaur' robot I worked on for my senior project. I've also constructed a 'base' for the robot which uses induction coils to charge the robot's USB battery pack while it is on the base. It can sit on this base while not in use which allows it to stay powered for long periods. </p>
-	    </td>
-	    <td>
-	      <a href="projects/internet_robot.html"><img class="project_image" src="projects/internet_robot_media/robot_0.jpg"/></a>
-	    </td>
-	  </tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/home_automation_v2.html">Home Automation V2!</a>
+          <p class="project_description">I made a whole bunch of improvements to the original home automation stuff I did. This time around I made custom PCBs and enclosures for both
+          the control hub and remote modules. The whole system records temperature and humidity in several different rooms, and can provide graphs of past temperature/humidity. It can control lights, and it will eventually be able to control all of the TVs in the apartment.</p>
+        </td>
+        <td>
+          <a href="projects/home_automation_v2.html"><img class="project_image" src="projects/home_automation_v2_media/home_page.jpg"/></a>
+        </td>
+      </tr>
 
 
       <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/N64_mod.html">Nintendo 64 LED Mod</a>
-	      <p class="project_description">When I finally bought another N64 (unfortunately I sold the one I had as a kid), I decided to make it a bit to make it more interesting by adding a bunch of LEDs. The LEDs in the controller ports are always the same color, but I added 3 RGB LEDs that will change color when you press the reset button. Nobody really used the reset button anyway.</p>
-	    </td>
-	    <td>
-	      <a href="projects/N64_mod.html"><img class="project_image" src="projects/N64_mod_media/N64_mod_1.jpg"/></a>
-	    </td>
-	  </tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/internet_robot.html">Internet Controlled Robot</a>
+          <p class="project_description">I made a small robot that is capable of being controlled through the internet via an android app or web browser. The robot provides a live POV video feed to the user who can drive the robot in real time. The robot uses an onboard Rasberry Pi to recieve control commands and serve a video stream from the attached camera. This project was really a smaller and simpler version of the 'Minotaur' robot I worked on for my senior project. I've also constructed a 'base' for the robot which uses induction coils to charge the robot's USB battery pack while it is on the base. It can sit on this base while not in use which allows it to stay powered for long periods. </p>
+        </td>
+        <td>
+          <a href="projects/internet_robot.html"><img class="project_image" src="projects/internet_robot_media/robot_0.jpg"/></a>
+        </td>
+      </tr>
 
-	
 
       <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/home_automation.html">Home Automation Projects</a>
-	      <p class="project_description">I've set up a home server with a Rasberry Pi and some PIC microcontrollers that allows me to control a couple different fixtures around the house. The Rasberry Pi sends commands to a PIC microcontroller which can perform several functions. For example, the PIC can use an RF transmitter to control some lamps that are plugged into off the shelf RF controlled outlets. </p>
-	    </td>
-	    <td>
-	      <a href="projects/home_automation.html"><img class="project_image" src="projects/home_automation_media/website_screenshot.jpg"/></a>
-	    </td>
-	  </tr>
-	  <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/N64_mod.html">Nintendo 64 LED Mod</a>
+          <p class="project_description">When I finally bought another N64 (unfortunately I sold the one I had as a kid), I decided to make it a bit to make it more interesting by adding a bunch of LEDs. The LEDs in the controller ports are always the same color, but I added 3 RGB LEDs that will change color when you press the reset button. Nobody really used the reset button anyway.</p>
+        </td>
+        <td>
+          <a href="projects/N64_mod.html"><img class="project_image" src="projects/N64_mod_media/N64_mod_1.jpg"/></a>
+        </td>
+      </tr>
 
-	  <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/minotaur_robot.html">Minataur Home Security Robot</a>
-	      <p class="project_description">This robot was designed and built for my senior project at Purdue University. The robot acts as a security system for the home or office. The user can navigate to a webpage and manually control the robot through the internet with the help of a live video feed. Alternatively, the user can put the robot into a patrol mode where it will navigate throughout the building autonomously and search for intruders. It accomplishes this with the help of a Microsoft Kinect device which aids in both navigation and human detection. The kinect senses depth and can, therefore, tell the differnce between an actual human being and an inanimate object. If an intruder is detected, the robot will take a picture and email it to the user.</p>
-	    </td>
-	    <td>
-	      <a href="projects/minotaur_robot.html"><img class="project_image" src="media/thumbs/MINOTAUR_FINAL_PACKAGING_thumb.jpg"/></a>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/space_invaders.html">Space Invaders Game Console</a>
-	      <p class="project_description">This project was completed for an embedded systems class at Purdue University. It is a 'Space Invaders' game console that can can be plugged into a computer monitor or TV through a VGA cable. This was accomplished using two motorolla HC9S12 microcontrollers. The first acted as a graphics card that generated the necessary signals for correct VGA video output. The second microcontroller handled all of the game logic and communicated the position of all of the images on the screen to the graphics controller. The attached controller includes an analog joystick for movement, a fire button, and a 'Start' button to start and pause the game.</p>
-	    </td>
-	    <td>
-	      <a href="projects/space_invaders.html"><img class="project_image" src="projects/space_invaders_media/space_invaders.jpg"/></a>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td class="descr_table_entry">
-	      <a class="project_title" href="projects/processor.html">Dual Core MIPS processor</a>
-	      <p class="project_description">This project was completed for a computer architecture course at Purdue University. I used VHDL to design a dual core, pipelined, MIPS instruction set processor.</p>
-	    </td>
-	    <td>
-	      <a href="projects/processor.html"><img class="project_image" src="projects/processor_media/Pipeline_Processor_Block_Diagram.jpg"/></a>
-	    </td>
-	  </tr>
-	</table>
+    
 
-      </div>
+      <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/home_automation.html">Home Automation Projects</a>
+          <p class="project_description">I've set up a home server with a Rasberry Pi and some PIC microcontrollers that allows me to control a couple different fixtures around the house. The Rasberry Pi sends commands to a PIC microcontroller which can perform several functions. For example, the PIC can use an RF transmitter to control some lamps that are plugged into off the shelf RF controlled outlets. </p>
+        </td>
+        <td>
+          <a href="projects/home_automation.html"><img class="project_image" src="projects/home_automation_media/website_screenshot.jpg"/></a>
+        </td>
+      </tr>
+      <tr>
 
-      <!--footer      -->
-      <div id="footer">
-	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
-	&nbsp &nbsp &nbsp &nbsp Last updated 03/2019
-      </div>
+      <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/minotaur_robot.html">Minataur Home Security Robot</a>
+          <p class="project_description">This robot was designed and built for my senior project at Purdue University. The robot acts as a security system for the home or office. The user can navigate to a webpage and manually control the robot through the internet with the help of a live video feed. Alternatively, the user can put the robot into a patrol mode where it will navigate throughout the building autonomously and search for intruders. It accomplishes this with the help of a Microsoft Kinect device which aids in both navigation and human detection. The kinect senses depth and can, therefore, tell the differnce between an actual human being and an inanimate object. If an intruder is detected, the robot will take a picture and email it to the user.</p>
+        </td>
+        <td>
+          <a href="projects/minotaur_robot.html"><img class="project_image" src="media/thumbs/MINOTAUR_FINAL_PACKAGING_thumb.jpg"/></a>
+        </td>
+      </tr>
+      <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/space_invaders.html">Space Invaders Game Console</a>
+          <p class="project_description">This project was completed for an embedded systems class at Purdue University. It is a 'Space Invaders' game console that can can be plugged into a computer monitor or TV through a VGA cable. This was accomplished using two motorolla HC9S12 microcontrollers. The first acted as a graphics card that generated the necessary signals for correct VGA video output. The second microcontroller handled all of the game logic and communicated the position of all of the images on the screen to the graphics controller. The attached controller includes an analog joystick for movement, a fire button, and a 'Start' button to start and pause the game.</p>
+        </td>
+        <td>
+          <a href="projects/space_invaders.html"><img class="project_image" src="projects/space_invaders_media/space_invaders.jpg"/></a>
+        </td>
+      </tr>
+      <tr>
+        <td class="descr_table_entry">
+          <a class="project_title" href="projects/processor.html">Dual Core MIPS processor</a>
+          <p class="project_description">This project was completed for a computer architecture course at Purdue University. I used VHDL to design a dual core, pipelined, MIPS instruction set processor.</p>
+        </td>
+        <td>
+          <a href="projects/processor.html"><img class="project_image" src="projects/processor_media/Pipeline_Processor_Block_Diagram.jpg"/></a>
+        </td>
+      </tr>
+    </table>
+
+	</div>
+
+
+	{% include footer.html %}
 
     </div>
   </body>

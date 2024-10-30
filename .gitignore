@@ -4,3 +4,6 @@
 
 # Ignore zipped up code
 *.zip
+
+# ignore the _site folder that contains built website
+_site

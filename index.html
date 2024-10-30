@@ -1,246 +1,74 @@
+---
+---
+
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
     <link rel="stylesheet" type="text/css" href="home.css"/>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
 
     <title>Scott Stack's Website</title>
-
-    <script type="text/javascript">
-      var blue_pressed = 0;
-      var green_pressed = 0;
-      var red_pressed = 0;
-
-      var redColor = 255;
-      var greenColor = 255;
-      var blueColor = 255;
-
-      var mouseY = 0;
-      
-      var redPotLine;
-      var greenPotLine;
-      var bluePotLine;
-
-      function unPressButtons() {
-        if (red_pressed == 1) {
-          red_pressed = 0;
-        }
-        else if (green_pressed == 1) {
-          green_pressed = 0;
-        }
-        else if (blue_pressed == 1) {
-          blue_pressed = 0;
-        }
-      }
-
-      function mouseMoved(evt) {
-        mouseY = evt.clientY;
-      }
-
-      function quickLinkDown(button) {
-        clicked_button = document.getElementById(button);
-        clicked_button.style.borderStyle = "inset";
-      }
-
-      function quickLinkUp() {
-        document.getElementById("linkedin_button").style.borderStyle = "outset";
-        document.getElementById("projects_button").style.borderStyle = "outset";
-        document.getElementById("resume_button").style.borderStyle = "outset";
-      }
-
-      setInterval(function monitorMouse() {
-        //var redtest = document.getElementById("redtest");
-        //var greentest = document.getElementById("greentest");
-        //var bluetest = document.getElementById("bluetest");
-
-        if (red_pressed == 1) {
-          redColor = 255/200 * mouseY;
-          redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
-          
-          //redtest.innerHTML = redColor.toString(); 
-        }
-        else if (green_pressed == 1) {
-          greenColor = 255/200 * mouseY;
-          greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
-
-          //greentest.innerHTML = greenColor.toString(); 
-        }
-        else if (blue_pressed == 1) {
-          blueColor = 255/200 * mouseY;
-          bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
-
-          //bluetest.innerHTML = blueColor.toString(); 
-        }
-
-        document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
-
-      }, 100);
-
-    </script>
 
   </head>
 
 
   <body>
     <div id="page">
-      <div id="Banner">
-	
-	<p id="page_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspScott Stack</p>
-	<object data="main_circuit.svg" type="image/svg+xml" style="position:absolute;height:100%;width:100%" id="svg_circuit"></object>
-	
-	<script>
-	  var redPot;
-	  var greenPot;
-	  var BluePot;
-	  
-	  var svgElm = document.getElementById("svg_circuit"); 
-	  svgElm.addEventListener("load",function(){
-	  var svgDoc = svgElm.contentDocument;
+    {% include header.html %}
 
-	  svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
-	    mouseY = evt.clientY;
-	  }, false);
-
-	  svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
-	    if (clickedOnce == 0) {
-              if (red_pressed == 1) {
-                red_pressed = 0;
-              }
-              if (green_pressed == 1) {
-                green_pressed = 0;
-              }
-              if (blue_pressed == 1) {
-                blue_pressed = 0;
-              }
-	    }
-	    clickedOnce = 0;
-	  }, false);
-
-	  redPot = svgDoc.getElementById("red_pot");
-	  redPot.addEventListener("mousedown",function redPressed() {
-	    red_pressed = 1;
-	    clickedOnce = 1;
-	  } , false);
-	  redPot.style.cursor = "pointer";
-
-	  greenPot = svgDoc.getElementById("green_pot");
-	  greenPot.addEventListener("mousedown",function greenPressed() {
-    	    green_pressed = 1;
-	    clickedOnce = 1;
-	  },false);
-	  greenPot.style.cursor = "pointer";
-	  
-	  bluePot = svgDoc.getElementById("blue_pot");
-	  bluePot.addEventListener("mousedown",function bluePressed() {
-	    blue_pressed = 1;
-	    clickedOnce = 1;
-	  },false);
-	  bluePot.style.cursor = "pointer";
-          
-	  },false);
-	</script>
-
-      </div>
-
-      <!-- TEST the potentiometer values
-      Red Pressed: <p id="redtest"></p>
-      Green Pressed: <p id="greentest"></p>
-      Blue Pressed: <p id="bluetest"></p>
-      -->
-
-      <div class="navbar">
-	<table class="navbar_table" cellspacing="0">
-	  <tr>
-	    <td class="navbar_entry">
-	      <a href="./index.html" style="color:#FFFFFF;background:#006561;">
-		Home
-	      </a>
-	    </td>
-	    <td class="navbar_entry">
-	      <a href="./projects.html">
-		Projects
-	      </a>
-	      <ul>
-					<li class="submenu_item"><a href="projects/power_supply.html">Bench Power Supply</a></li>
-					<li class="submenu_item"><a href="projects/pcb_clock.html">PCB Alarm Clock</a></li>
-          <li class="submenu_item"><a href="projects/night_vision.html">Night Vision Goggles</a></li>
-          <li class="submenu_item"><a href="projects/desk.html">Motorized Desk</a></li>
-          <li class="submenu_item"><a href="projects/IR_recorder.html">IR Recorder</a></li>
-          <li class="submenu_item"><a href="projects/home_automation_v2.html">Home Automation V2</a></li>
-          <li class="submenu_item"><a href="projects/internet_robot.html">Internet Robot</a></li>
-          <li class="submenu_item"><a href="projects/N64_mod.html">N64 Mod</a></li>
-          <li class="submenu_item"><a href="projects.html">. . .</a></li>
-	      </ul>
-	    </td>
-
-	    <td class="navbar_entry">
-	      <a href="./contact.html">
-		Contact
-	      </a>
-	    </td>
-
-	  </tr>
-	</table>
-      </div>
-
-      <div class="main_content" onmouseup="quickLinkUp()">
-	<table class="main_table">
-	  <tr>
-	    <td id="intro_text" colspan="2">
-	    </td>
-	  </tr>
+    <div class="main_content" onmouseup="quickLinkUp()">
+    <table class="main_table">
+      <tr>
+        <td id="intro_text" colspan="2">
+        </td>
+      </tr>
 
 
-	  <!-- quick link box and news feed box row -->
-	  <tr>
+      <!-- quick link box and news feed box row -->
+      <tr>
 
-	    <!--button panel -->
-	    <td class="button_panel">
-	  <table>
-		<tr>
-		  <td>
-		    <div class="link_button" id="linkedin_button" onmousedown="quickLinkDown('linkedin_button')">
-		      <a href="http://www.linkedin.com/pub/scott-stack/45/6ab/997/">Linkedin Profile</a>
-		    </div>
-		  </td>
-		</tr>
-		<tr>
-		  <td>
-		    <div class="link_button" id="projects_button" onmousedown="quickLinkDown('projects_button')">
-		      <a href="./projects.html">List of all Projects</a>
-		    </div>
-		  </td>
-		</tr>
-	  </table>
-	</td>
-	    
-	    <!--News feed -->
-	    <td class="news_feed">
-	      <h2>What's New</h2>
-	      <ul>
+        <!--button panel -->
+        <td class="button_panel">
+			<table>
+				<tr>
+				<td>
+					<div class="link_button" id="linkedin_button" onmousedown="quickLinkDown('linkedin_button')">
+					<a href="http://www.linkedin.com/pub/scott-stack/45/6ab/997/">Linkedin Profile</a>
+					</div>
+				</td>
+				</tr>
+				<tr>
+				<td>
+					<div class="link_button" id="projects_button" onmousedown="quickLinkDown('projects_button')">
+					<a href="./projects.html">List of all Projects</a>
+					</div>
+				</td>
+				</tr>
+			</table>
+			</td>
+        
+        <!--News feed -->
+        <td class="news_feed">
+          <h2>What's New</h2>
+          <ul>
 
         <li><span class="news_timestamp">4/19/2019 - </span><a href="projects/power_supply.html">Bench Power Supply</a> Added a page for my new custom clear-cased bench power supply!</li>
         <li><span class="news_timestamp">7/15/2018 - </span><a href="projects/pcb_clock.html">PCB Alarm Clock</a> Added project page for my custom PCB art alarm clock!</li>
         <li><span class="news_timestamp">2/13/2018 - </span><a href="projects/night_vision.html">Night Vision</a> Added <strong><span style="color:green">night vision</span></strong> goggles project to the projects section!</li>
-				<li><span class="news_timestamp">1/20/2018 - </span><a href="projects.html">Moar Projects!</a> Added a few more projects to the list including a motorized desk and an IR recorder. Also added a video to the internet controlled robot page. </li>
-				<li><span class="news_timestamp">5/14/2016 - </span><a href="projects/N64_mod.html">N64 Mod</a> project page added. I modded my N64 a while ago, but finally got around to putting up details on the website</li>
-			  <li><span class="news_timestamp">1/11/2015 - </span><a href="projects/internet_robot.html">Mini internet controlled robot</a> project added. Tiny little robot that you can drive through the internet.</li>
-			  <li><span class="news_timestamp">2/8/2014 - </span><a href="projects/home_automation.html">home automation project page</a>. My first attempt at some home automation. Includes light control, security webcam, some very basic temperature monitoring, and TV control.</li>
-		<!--<li><span class="news_timestamp">xx/xx/xxxx - </span>*Insert Entry Here*</li>-->
-	      </ul>
-	    </td>
+                <li><span class="news_timestamp">1/20/2018 - </span><a href="projects.html">Moar Projects!</a> Added a few more projects to the list including a motorized desk and an IR recorder. Also added a video to the internet controlled robot page. </li>
+                <li><span class="news_timestamp">5/14/2016 - </span><a href="projects/N64_mod.html">N64 Mod</a> project page added. I modded my N64 a while ago, but finally got around to putting up details on the website</li>
+              <li><span class="news_timestamp">1/11/2015 - </span><a href="projects/internet_robot.html">Mini internet controlled robot</a> project added. Tiny little robot that you can drive through the internet.</li>
+              <li><span class="news_timestamp">2/8/2014 - </span><a href="projects/home_automation.html">home automation project page</a>. My first attempt at some home automation. Includes light control, security webcam, some very basic temperature monitoring, and TV control.</li>
+        <!--<li><span class="news_timestamp">xx/xx/xxxx - </span>*Insert Entry Here*</li>-->
+          </ul>
+        </td>
 
-	  </tr>
-	</table>
+      </tr>
+    </table>
+	</div>
 
-      </div>
+	{% include footer.html %}	
 
-      <!--footer      -->
-      <div id="footer">
-	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
-	&nbsp &nbsp &nbsp &nbsp Last updated 07/2019
-      </div>
-
-    </div>
+  </div>
   </body>
 </html>
     

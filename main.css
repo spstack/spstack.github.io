@@ -3,7 +3,8 @@
 #page {
     width : 90%;
     margin: 0 auto;
-    min-width : 1210;
+    min-width : 1000;
+    max-width : 1920;
 }
 
 /*   BANNER    */
@@ -11,30 +12,30 @@
     background : #01623B;
     height : 200px;
     position : relative;
-    padding : 0;
+    padding-left : 35px;
     
     border-style : outset;
     border-width : 1px;
     border-color : #01522B;
 }
 
-#Banner svg {
-    position : absolute;
+#svg_circuit {
+    height : 100%;
+    width : 100%;
 }
 
-
 #page_title {
-    font-family : arial;
+    font-family : monospace;
     position : absolute;
     padding : 0;
     margin : 0;
     font-size : 35px;
     color : #DDDDDD;
     top : 80px;
-    left : 40px;
+    left : 75px;
     width : 335px;
     height : 40px;
-    text-position : center;
+    text-align : center;
     border-style : outset;
     border-width : 3px;
     border-color : #222222;
