@@ -1,153 +1,322 @@
-/* This will style all of the things common to all of the pages on da site (banner, navbar, etc...   */
+/* Shared styling for every page on the site: colours, type, banner, navbar, cards, footer */
 
-#page {
-    width : 90%;
-    margin: 0 auto;
-    min-width : 1000;
-    max-width : 1600;
+/* ---------- Tokens ---------- */
+:root {
+    --mask:        #01623B;   /* solder mask green (banner) */
+    --mask-deep:   #014A2C;
+    --trace:       #21825B;   /* copper traces under the mask */
+    --gold:        #A8832E;   /* ENIG pad gold, darkened for text contrast */
+    --gold-bright: #C9A44C;
+    --paper:       #F4F6F4;
+    --surface:     #FFFFFF;
+    --ink:         #16201B;
+    --ink-soft:    #4C5B53;
+    --line:        #D5DDD8;
+    --link:        #01623B;
+
+    --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+    --page-max: 1220px;
+    --gutter: clamp(16px, 3vw, 32px);
+    --radius-board: 14px;
+    --radius-img: 6px;
+
+    color-scheme: light;
 }
 
-/*   BANNER    */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper:    #0B1A13;
+        --surface:  #11251B;
+        --ink:      #E2EAE5;
+        --ink-soft: #A3B4AA;
+        --line:     #24402F;
+        --link:     #7FD3A8;
+        --gold:     #D9B865;
+        color-scheme: dark;
+    }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, video, iframe { max-width: 100%; }
+img { height: auto; }
+
+a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--gold); text-decoration-thickness: 2px; }
+
+:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+h1, h2, h3 {
+    font-family: var(--sans);
+    font-stretch: 112%;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+#page {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: var(--gutter) var(--gutter) 0;
+}
+
+/* ---------- Banner (the circuit board) ---------- */
 #Banner {
-    background : #01623B;
-    height : 200px;
-    position : relative;
-    padding-left : 55px;
-    
-    border-style : outset;
-    border-width : 1px;
-    border-color : #01522B;
-    border-radius: 15px 15px 5px 5px;
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background:
+        radial-gradient(120% 140% at 30% 20%, #02744A 0%, var(--mask) 45%, var(--mask-deep) 100%);
+    border-radius: var(--radius-board);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 -6px 0 rgba(0, 0, 0, 0.18);
+}
+
+.banner_inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1220px;
+    height: 200px;
+    transform-origin: 0 0;
 }
 
 #svg_circuit {
-    height : 100%;
-    width : 100%;
+    display: block;
+    color-scheme: light;   /* keeps the embedded SVG transparent in dark mode */
+    width: 100%;
+    height: 100%;
 }
 
+/* the name, styled as the big IC on the board */
 #page_title {
-    font-family : monospace;
-    position : absolute;
-    padding : 0;
-    margin : 0;
-    font-size : 35px;
-    color : #DDDDDD;
-    top : 80px;
-    left : 95px;
-    width : 335px;
-    height : 40px;
-    text-align : center;
-    border-style : outset;
-    border-width : 3px;
-    border-color : #333333;
-    background : #555555;
+    position: absolute;
+    top: 78px;
+    left: 40px;
+    width: 335px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: var(--sans);
+    font-stretch: 112%;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    text-decoration: none;
+    background: linear-gradient(#2A2E2C, #1C1F1E);
+    border-radius: 3px;
+    box-shadow:
+        0 0 0 1px #0E100F,
+        0 3px 0 rgba(0, 0, 0, 0.35);
+    z-index: 1;
 }
+/* pin 1 dot */
+#page_title::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3E4441;
+}
+#page_title:hover { text-decoration: none; }
 
-
-
-/*    NAVBAR    */
+/* ---------- Navbar ---------- */
 .navbar {
-    background : #36D695;
-    padding : 0;
-    margin-top : 2px;
-
-    border-radius: 5px 5px 10px 10px;
+    margin: 12px 0 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    position: relative;
+    z-index: 10;
 }
 
-.navbar_table {
-    cell-spacing : 0;
+.navbar_list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--line);
 }
 
+.navbar_entry { position: relative; }
+.navbar_right { margin-left: auto; }
 
-.navbar_entry a {
-    display : inline-block;
-    width : 150px;
-    text-decoration : none;
-    color : #040060;
-    padding-top : 10px;
-    padding-bottom : 10px;
-     
+.navbar_entry > a {
+    display: block;
+    padding: 12px 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
 }
 
-.navbar_entry ul {
-    display : none;
-    list-style : none;
-    position : absolute;
-    background : #DDDDE5;
-    padding : 0;
-    margin : 0;
-    width : 300px;
-    border-width : 2px;
-    border-bottom : 2px;
-    border-left : 2px;
-    border-right : 2px;
-    
+.navbar_entry > a:hover { color: var(--ink); }
+
+.navbar_entry > a.active {
+    color: var(--ink);
+    font-weight: 650;
+    border-bottom-color: var(--trace);
 }
 
-.submenu_item a{
-    width : 300px;
-    
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 270px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 12px 28px -12px rgba(1, 50, 30, 0.35);
 }
 
-.navbar_entry {
-    height : 40px;
-    width : 150px;
-    text-align : center;
-    font-size: 20px;
-    vertical-align : middle;
-    position : relative;
+.has_menu:hover > .submenu,
+.has_menu:focus-within > .submenu { display: block; }
+
+.submenu_item a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.submenu_item a:hover { background: var(--paper); color: var(--ink); }
+.submenu_all { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 4px; }
+.submenu_all a { color: var(--ink-soft); }
+
+@media (hover: none) {
+    .has_menu:hover > .submenu { display: none; }
 }
 
-
-
-.navbar_entry a:hover {
-    background : #006561;
-    color : #FFFFFF;
-}
-
-.navbar_entry:hover > ul, .navbar_entry ul:hover {
-    display : block;
-}
-
-
-
+/* ---------- Main content ---------- */
 .main_content {
-    padding-top : 5px;
-    padding-left : 10px;
-    padding-right : 10px;
-    min-height : 600px;
-    border-color : #BBBBBB;
-    border-left-style : solid;
-    border-left-width : 1px;
-    border-right-style : solid;
-    border-right-width : 1px;
-    font-family : arial;
+    padding: clamp(28px, 5vw, 56px) 0 64px;
+    min-height: 50vh;
 }
 
-.main_content p {
-    background : white;
+/* ---------- Project cards (home page + projects page) ---------- */
+.project_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+    gap: 40px 32px;
 }
 
+.project_card {
+    display: flex;
+    flex-direction: column;
+}
 
+.card_image {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-img);
+    background: var(--mask-deep);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
+}
+
+.card_image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+}
+
+.project_card:hover .card_image img { transform: scale(1.03); }
+
+.card_body { padding-top: 16px; }
+
+.project_card .project_title {
+    margin: 0 0 8px;
+    font-size: 1.3rem;
+    font-weight: 650;
+}
+
+.project_card .project_title a {
+    color: var(--ink);
+    text-decoration: none;
+}
+.project_card .project_title a:hover { color: var(--link); text-decoration: underline; }
+
+.project_card .project_description {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* topic tags styled like little SMD pads */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+.tags li {
+    padding: 2px 9px;
+    border-radius: 3px;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+}
+
+/* ---------- Footer ---------- */
 #footer {
-    width : 100%;
-    height : auto;
-    background : #CCCCCC;
-    font-size : 12px;
-    padding : 1px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 24px 0 40px;
+    border-top: 1px solid var(--line);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
 }
+#footer p { margin: 0; }
 
-
-.construction {
-    margin-top : 5px;
-    margin-bottom : 5px;
-    padding-top : 1px;
-    height : 50px;
-    background : #777777;
-    color : #AA1111;
-    font-family : ariel;
-    font-size : 18px;
-    text-align : center;
-    font-weight : bold;
-    width : auto;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
 }

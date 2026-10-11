@@ -1,21 +1,16 @@
 ---
+title: "Evolution Simulation Display"
 ---
 
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="../main.css"/>
-    <link rel="stylesheet" type="text/css" href="../projects.css"/>
-    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
-
-    <title>Scott Stack's Website</title>
-
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html title=page.title css="/projects/project_pages.css" %}
 
 <body>
   <div id="page">
-    {% include header.html %}
+  {% include header.html %}
 
-    <div class="main_content">
+    <main class="main_content project">
         <h1 id="project_title">Evolution Simulation Display</h1>
 
         <table>
@@ -122,13 +117,10 @@
             -->
 
         </table>
-    </div>
+    </main>
 
-    {% include footer.html %}
-
-    </div>
-
-    </div>
+  {% include footer.html %}
+  </div>
 </body>
 
 </html>

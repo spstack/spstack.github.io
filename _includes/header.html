@@ -1,144 +1,117 @@
 
-<div id="Banner">
-    <p id="page_title">Scott Stack</p>
-    <object data="/main_circuit.svg" type="image/svg+xml" id="svg_circuit"></object>
+<header id="Banner">
+    <div class="banner_inner">
+        <a id="page_title" href="/index.html">Scott Stack</a>
+        <object data="/main_circuit.svg" type="image/svg+xml" id="svg_circuit" aria-label="Circuit board graphic. Drag the red, green and blue knobs to change the colour of the name."></object>
+    </div>
 
     <script type="text/javascript">
-        var blue_pressed = 0;
-        var green_pressed = 0;
-        var red_pressed = 0;
-
-        var redColor = 255;
-        var greenColor = 255;
-        var blueColor = 255;
-
-        var mouseY = 0;
-        
-        var redPotLine;
-        var greenPotLine;
-        var bluePotLine;
-
-        function unPressButtons() {
-            if (red_pressed == 1) {
-            red_pressed = 0;
+        // Scale the fixed-size circuit board graphic to fit the screen. On phones it
+        // stops shrinking at 55% so the name stays readable, and the right side is cropped.
+        (function () {
+            var BOARD_W = 1220, BOARD_H = 200, MIN_SCALE = 0.55;
+            function fitBanner() {
+                var banner = document.getElementById("Banner");
+                var inner = banner.querySelector(".banner_inner");
+                var width = banner.clientWidth;
+                var scale = Math.max(MIN_SCALE, Math.min(1, width / BOARD_W));
+                var offset = Math.max(0, (width - BOARD_W * scale) / 2);
+                inner.style.transform = "translateX(" + offset + "px) scale(" + scale + ")";
+                banner.style.height = (BOARD_H * scale) + "px";
             }
-            else if (green_pressed == 1) {
-            green_pressed = 0;
-            }
-            else if (blue_pressed == 1) {
-            blue_pressed = 0;
-            }
-        }
+            fitBanner();
+            window.addEventListener("resize", fitBanner);
+        })();
 
-        function mouseMoved(evt) {
-            mouseY = evt.clientY;
-        }
+        // RGB knobs: grab a knob, move the mouse up/down to set that colour of the name.
+        // Drag-and-release works, and so does click once to grab, click again to let go.
+        (function () {
+            var BOARD_H = 200;
+            var colors = { red: 255, green: 255, blue: 255 };
+            var pivots = { red: 902, green: 982, blue: 1062 };   // knob centres in the SVG
+            var pots = {};
+            var active = null, dragged = false, startY = 0, wired = false;
 
-        setInterval(function monitorMouse() {
-            //var redtest = document.getElementById("redtest");
-            //var greentest = document.getElementById("greentest");
-            //var bluetest = document.getElementById("bluetest");
+            var title = document.getElementById("page_title");
+            var svgElm = document.getElementById("svg_circuit");
+            var inner = svgElm.parentNode;
 
-            if (red_pressed == 1) {
-            redColor = 255/200 * mouseY;
-            redPot.setAttribute("transform", "rotate(" + 360/255 * redColor.toString() + " 902 72)");
-            
-            //redtest.innerHTML = redColor.toString(); 
-            }
-            else if (green_pressed == 1) {
-            greenColor = 255/200 * mouseY;
-            greenPot.setAttribute("transform", "rotate(" + 360/255 * greenColor.toString() + " 982 72)");
-
-            //greentest.innerHTML = greenColor.toString(); 
-            }
-            else if (blue_pressed == 1) {
-            blueColor = 255/200 * mouseY;
-            bluePot.setAttribute("transform", "rotate(" + 360/255 * blueColor.toString() + " 1062 72)");
-
-            //bluetest.innerHTML = blueColor.toString(); 
+            function setColor(name, value) {
+                colors[name] = Math.max(0, Math.min(255, value));
+                pots[name].setAttribute("transform", "rotate(" + (360 / 255 * colors[name]) + " " + pivots[name] + " 72)");
+                title.style.color = "rgb(" + Math.floor(colors.red) + "," + Math.floor(colors.green) + "," + Math.floor(colors.blue) + ")";
             }
 
-            document.getElementById("page_title").style.color = "rgb(" + Math.floor(redColor).toString() + "," + Math.floor(greenColor).toString() + "," + Math.floor(blueColor).toString() + ")";
+            // y is in board coordinates (0 at the top of the board, 200 at the bottom)
+            function track(y) {
+                if (!active) return;
+                if (Math.abs(y - startY) > 3) dragged = true;
+                setColor(active, 255 / BOARD_H * y);
+            }
 
-        }, 100);
+            function onMouseUp() {
+                if (active && dragged) active = null;
+            }
+
+            // Hook up the knobs once the SVG document is available. Called both on the
+            // load event and straight away, because a cached SVG can finish loading
+            // before this script runs, and then the load event is never seen.
+            function wireKnobs() {
+                var svgDoc = svgElm.contentDocument;
+                if (wired || !svgDoc || !svgDoc.getElementById("red_pot")) return;
+                wired = true;
+
+                ["red", "green", "blue"].forEach(function (name) {
+                    var pot = svgDoc.getElementById(name + "_pot");
+                    pots[name] = pot;
+                    pot.style.cursor = "grab";
+                    pot.addEventListener("mousedown", function (evt) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                        if (active === name) { active = null; return; }
+                        active = name;
+                        dragged = false;
+                        startY = evt.clientY;
+                    });
+                });
+
+                svgDoc.addEventListener("mousemove", function (evt) { track(evt.clientY); });
+                svgDoc.addEventListener("mouseup", onMouseUp);
+                // clicking anywhere else on the board lets go of the knob
+                svgDoc.addEventListener("mousedown", function () { active = null; });
+            }
+
+            // keep tracking when the mouse leaves the board while a knob is held
+            window.addEventListener("mousemove", function (evt) {
+                if (!active) return;
+                var rect = inner.getBoundingClientRect();
+                track((evt.clientY - rect.top) / (rect.height / BOARD_H));
+            });
+            window.addEventListener("mouseup", onMouseUp);
+
+            svgElm.addEventListener("load", wireKnobs);
+            wireKnobs();
+        })();
     </script>
+</header>
 
 
-    <script type="text/javascript">
-        var redPot;
-        var greenPot;
-        var bluePot;
-        var clickedOnce = 0;
-        
-        var svgElm = document.getElementById("svg_circuit"); 
-        svgElm.addEventListener("load",function(){
-        var svgDoc = svgElm.contentDocument;
-
-        svgDoc.addEventListener("mousemove", function mouseMoved(evt) {
-            mouseY = evt.clientY;
-        }, false);
-
-        svgDoc.getElementById("main_circuit").addEventListener("click", function unClickButtons(evt) {
-            if (clickedOnce == 0) {
-                if (red_pressed == 1) {
-                    red_pressed = 0;
-                }
-                if (green_pressed == 1) {
-                    green_pressed = 0;
-                }
-                if (blue_pressed == 1) {
-                    blue_pressed = 0;
-                }
-            }
-            clickedOnce = 0;
-        }, false);
-
-        redPot = svgDoc.getElementById("red_pot");
-        redPot.addEventListener("mousedown",function redPressed() {
-            red_pressed = 1;
-            clickedOnce = 1;
-        } , false);
-        redPot.style.cursor = "pointer";
-
-        greenPot = svgDoc.getElementById("green_pot");
-        greenPot.addEventListener("mousedown",function greenPressed() {
-                green_pressed = 1;
-            clickedOnce = 1;
-        },false);
-        greenPot.style.cursor = "pointer";
-        
-        bluePot = svgDoc.getElementById("blue_pot");
-        bluePot.addEventListener("mousedown",function bluePressed() {
-            blue_pressed = 1;
-            clickedOnce = 1;
-        },false);
-        bluePot.style.cursor = "pointer";
-            
-        },false);
-    </script>
-</div>
-
-
-<div class="navbar">
-    <table class="navbar_table" cellspacing="0">
-      <tr>
-        <td class="navbar_entry">
-          <a href="/index.html">  <!--style="color:#FFFFFF;background:#006561;"-->
-            Home
-          </a>
-        </td>
-        <td class="navbar_entry">
-          <a href="/projects.html">
-            Projects
-          </a>
-            <ul>
-                <li class="submenu_item"><a href="/projects/evolution_sim.html">Evolution Sim Display</a></li>
-                <li class="submenu_item"><a href="/projects/remote_outlet.html">Remote Switched Outlet</a></li>
-                <li class="submenu_item"><a href="/projects/power_supply.html">Bench Power Supply</a></li>
-                <li class="submenu_item"><a href="/projects/pcb_clock.html">PCB Alarm Clock</a></li>
-                <li class="submenu_item"><a href="/projects.html">. . .</a></li>
+<nav class="navbar" aria-label="Main">
+    <ul class="navbar_list">
+        <li class="navbar_entry">
+            <a href="/index.html"{% if page.url == "/" or page.url == "/index.html" %} class="active" aria-current="page"{% endif %}>Home</a>
+        </li>
+        <li class="navbar_entry has_menu">
+            <a href="/projects.html"{% if page.url contains "projects" %} class="active"{% endif %}>Projects</a>
+            <ul class="submenu">
+                {% for p in site.data.projects limit:5 %}
+                <li class="submenu_item"><a href="/{{ p.url }}">{{ p.title }}</a></li>
+                {% endfor %}
+                <li class="submenu_item submenu_all"><a href="/projects.html">All projects</a></li>
             </ul>
-        </td>
-      </tr>
-    </table>
-</div>
+        </li>
+        <li class="navbar_entry navbar_right">
+            <a href="https://github.com/spstack">GitHub</a>
+        </li>
+    </ul>
+</nav>

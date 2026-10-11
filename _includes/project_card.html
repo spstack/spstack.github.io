@@ -1,0 +1,12 @@
+<article class="project_card{% if include.featured %} featured{% endif %}">
+    <a class="card_image" href="/{{ include.project.url }}" tabindex="-1" aria-hidden="true">
+        <img src="/{{ include.project.image }}" alt="" loading="lazy"/>
+    </a>
+    <div class="card_body">
+        <h3 class="project_title"><a href="/{{ include.project.url }}">{{ include.project.title }}</a></h3>
+        <p class="project_description">{{ include.project.description }}</p>
+        <ul class="tags" aria-label="Topics">
+            {% for t in include.project.tags %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+    </div>
+</article>

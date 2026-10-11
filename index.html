@@ -1,37 +1,38 @@
 ---
 ---
-
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="home.css"/>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-
-    <title>Scott Stack's Website</title>
-
-  </head>
-
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html css="/home.css" %}
 
   <body>
     <div id="page">
     {% include header.html %}
 
-    <div class="main_content">
-    <table class="main_table">
-      <tr>
-        <td id="intro_text" colspan="2">
-            Hey there, I made this site really just to document and show off some fun projects I've done throughout the years. Some of them are pretty old at this point, so don't judge me too harshly :)
-            Feel free to check out my github too which may have some more projects: <a href="https://github.com/spstack">https://github.com/spstack</a>. Thanks!
-          <p>
-            - Scott
-          </p>
-        </td>
-      </tr>
-    </table>
-	</div>
+    <main class="main_content">
+      <section id="intro">
+        <p id="intro_text">
+          Hey there, I made this site really just to document and show off some fun projects I've done throughout the years.
+          Some of them are pretty old at this point, so don't judge me too harshly :)
+          Feel free to check out my <a href="https://github.com/spstack">GitHub</a> too, which may have some more projects. Thanks!
+        </p>
+        <p id="signature">Scott</p>
+      </section>
 
-	{% include footer.html %}	
+      <section id="latest" aria-labelledby="latest_heading">
+        <div class="section_head">
+          <h2 id="latest_heading">Latest projects</h2>
+          <a class="see_all" href="/projects.html">See all {{ site.data.projects.size }} projects</a>
+        </div>
 
-  </div>
+        <div class="project_grid home_grid">
+          {% for p in site.data.projects limit:4 %}
+            {% include project_card.html project=p featured=forloop.first %}
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+
+    {% include footer.html %}
+    </div>
   </body>
 </html>
-    

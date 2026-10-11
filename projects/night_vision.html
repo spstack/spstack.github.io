@@ -1,22 +1,19 @@
 ---
+title: "Night Vision Goggles"
+updated: "Feb 2018"
 ---
 
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="../main.css"/>
-    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
-    <link rel="stylesheet" type="text/css" href="../projects.css"/> 
-
-    <title>Scott Stack's Website</title>
-
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html title=page.title css="/projects/project_pages.css" %}
 
 <body>
   <div id="page">
   {% include header.html %}
 
-  <div class="main_content">
+  <main class="main_content project">
     <h1 id="project_title">Night Vision Goggles</h1>
+    <p id="project_date">Last updated {{ page.updated }}</p>
   
   <table>
     <tr>
@@ -98,17 +95,9 @@
     
     
   </table>
-      </div>
+      </main>
 
-      <!--footer      -->
-      <div id="footer">
-  Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
-  &nbsp &nbsp &nbsp &nbsp Last updated 02/2018
-      </div>
-
-
-        </div>
-
-    </div>
-    </body>
+  {% include footer.html %}
+  </div>
+</body>
 </html>

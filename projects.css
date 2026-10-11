@@ -1,36 +1,18 @@
 /*  projects page styling  */
 
-#projects_table {
-    color : black;
-    padding-top : 25px;
+.page_head {
+    max-width: 44rem;
+    margin-bottom: 40px;
 }
 
-.descr_table_entry {
-    padding : 15px 15px 25px 15px;
-    vertical-align : top;
+.page_head h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem);
+    font-weight: 750;
 }
 
-.project_title {
-    font-size : 24px;
-    text-decoration : none;
-    color : #2222AA;
-}
-
-.project_description {
-    padding-left : 2em;
-    font-family : ariel;
-    font-size : 18px;
-}
-
-.project_title:hover {
-    text-decoration : underline;
-}
-
-.project_image {
-    margin : 15px 15px 15px 15px;
-    width : 350px;
-    height : 250px;
-    border-style : solid;
-    border-width : 1px;
-    border-color : black; 
+.page_lede {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
 }

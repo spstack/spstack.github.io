@@ -1,102 +1,141 @@
-/* Styling page for the project detail pages */
+/* Styling for the project detail pages.
+   The pages are laid out with old-school tables; these rules turn those tables
+   into a single readable column with a hero image and wrapping image rows. */
 
+.project {
+    --measure: 66rem;   /* text runs nearly the full width of the banner */
+}
 
 #project_title {
-    font-family : arial;
-    font-size : 30px;
-    font-style : italic;
-    padding-left : 25px;
-    text-align : center;
+    max-width: 52rem;
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+    font-weight: 750;
 }
 
 #project_date {
-    font-family : arial;
-    font-size : 16px;
-    font-style : italic;
-    padding-left : 25px;
-    text-align : center;
+    margin: 0 0 clamp(24px, 4vw, 40px);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
 }
 
-
-.main_image {
-		vertical-align : top;
-		padding-top : 0px;
-    width : 364;
-    height : 300;
-    margin : 15px;
+/* ---- flatten the layout tables ---- */
+.project table,
+.project tbody,
+.project tr,
+.project td {
+    display: block;
+    width: auto;
+    padding: 0;
+    border: 0;
 }
 
+/* rows lay their cells out side by side and wrap when they run out of room */
+.project tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.project td {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+/* in the row that holds the main photo, the text takes the full width... */
+.project td.text_td,
+.project tr:has(> td.main_image) > td:not(.main_image) { flex: 1 1 100%; order: 2; }
+
+/* ...and the main photo becomes a hero image above it */
+.project tr > td.main_image {
+    flex: 1 1 100%;
+    order: 1;
+    margin: 0 0 8px;
+}
+
+.project td.main_image img {
+    display: block;
+    max-width: 100%;
+    max-height: 560px;
+    width: auto;
+    border-radius: var(--radius-img);
+}
+
+.project table + table,
+.project td > table { margin: 20px 0; }
+
+/* ---- text ---- */
 .section_title {
-    font-family : arial;
-    font-size : 24px;
-    padding-left : 2em;
-    padding-top : 40px;
-    vertical-align : text-top;
+    max-width: var(--measure);
+    margin: 48px 0 12px;
+    font-family: var(--sans);
+    font-stretch: 112%;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
 }
 
+.section_title:empty { display: none; }
 
 .section_text {
-    font-family : arial;
-    font-size : 17px;
-    padding-left : 2em;
-    text-indent : 2em;
+    max-width: var(--measure);
+    margin: 0 0 1.1em;
+    line-height: 1.7;
 }
 
+.project ul, .project ol { max-width: var(--measure); }
 
-img.section_image {
-    padding-left : 1em;
-    width : 100%;
-    margin : 0px;
-    max-width : 750px;
+/* ---- images ---- */
+.project img.section_image {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    border-radius: var(--radius-img);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
 }
 
-td.section_image {
-    padding-left : 1em;
-	width : 100%;
+.project video.section_image,
+.project iframe {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: var(--radius-img);
+    padding: 0 !important;
+    margin: 8px 0;
 }
 
-video.section_image {
-    padding-left : 1em;
-    width : 100%;
-    margin : 0px;
-    max-width : 750px;
+.project video.section_image { aspect-ratio: auto; background: #000; }
+
+/* ---- "More pictures" thumbnail strip ---- */
+.project .img_table tr { gap: 12px; }
+
+.project td.img_td { flex: 0 0 auto; }
+
+.project .img_thumb {
+    display: block;
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: var(--radius-img);
 }
 
+.project a.img_thumb:hover img { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
 
-#video_demo_link {
-    font-size : 20px;
-    font-family : arial;
-    font-style : none;
-    color : blue;
-    padding-left : 2em;
+@media (max-width: 600px) {
+    .project td.img_td { flex: 1 1 calc(50% - 6px); }
+    .project .img_thumb { width: 100%; height: auto; aspect-ratio: 1; }
 }
 
+/* ---- download / demo links ---- */
+#video_demo_link,
 #code_link {
-    font-size : 20px;
-    font-family : arial;
-    font-style : none;
-    color : blue;
-    padding-left : 2em;
-}
-
-
-.img_table {
-    padding-top : 15px;
-    padding-left : 4em;
-}
-
-td.img_td {
-    padding : 5px 10px 10px 10px;
-    /*padding : 5px 20px 20px 20px;*/
-}
-
-.img_thumb {
-    width : 200;
-    height : 200;
-    border-style : solid;
-    border-width : 1px;
-}
-
-.text_td {
-    vertical-align : text-top;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.05rem;
 }

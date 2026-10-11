@@ -1,76 +1,71 @@
 /*  Styling for the home page */
 
+#intro {
+    max-width: 66rem;   /* match the project pages: nearly the full banner width */
+    margin-bottom: clamp(48px, 8vw, 88px);
+}
 
 #intro_text {
-    padding-right : 15px;
-    font-size : 20px;
-    padding-left : 10px;
-    text-indent : 0em;
-    line-height : 1.5em;
-    font-style : italic;
-    margin-bottom : 40px;
+    margin: 0;
+    font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.6rem);
+    line-height: 1.5;
 }
 
+#signature {
+    margin: 18px 0 0;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+}
+#signature::before { content: "\2014\00a0"; }
 
-.main_table {
-    margin-top : 10px;
-    border-spacing : 15px;
+.section_head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
 }
 
-.button_panel {
-    width : 28%;
-    padding-left : 10px;
+.section_head h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
-.button_panel h2 {
-    padding-left : 20px;
+.see_all {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-.button_panel table {
-    width : 100%;
-    border-spacing : 10px;
+/* Newest project gets a wide row; the next three sit underneath */
+.home_grid {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-
-.link_button {
-    padding-top : 0px;
-    margin : 0 auto;
-    border-style : outset;
-    border-width : 4px;
-    text-align : center;
-    width : 75%;  
-    height : 100%;
-    background : #51A673;
-    font-style : bold;
+.home_grid .featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: center;
 }
 
+.home_grid .featured .card_image { aspect-ratio: 16 / 10; }
+.home_grid .featured .card_body { padding-top: 0; }
+.home_grid .featured .project_title { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem); margin-bottom: 14px; }
+.home_grid .featured .project_description { font-size: 1.1rem; -webkit-line-clamp: unset; }
 
-.link_button a {
-    padding-top : 15px;
-    padding-bottom : 15px;
-    display : block;
-    text-decoration : none;
-    width : 100%;
-    height : 100%;
-    color : black;
-    font-size : 18px;
+@media (max-width: 900px) {
+    .home_grid { grid-template-columns: repeat(2, 1fr); }
+    .home_grid .featured { grid-template-columns: 1fr; gap: 0; }
+    .home_grid .featured .card_body { padding-top: 16px; }
 }
 
-.news_feed {
-    padding-left : 8%;
-    vertical-align : top;
-}
-
-.news_feed ul {
-    font-size : 18px;
-    font-family : Serif;
-    color : #555555;
-    line-height : 1.5em;
-    
-}
-
-
-.news_timestamp {
-    font-size : 14px;
-    font-style : italic;
+@media (max-width: 600px) {
+    .home_grid { grid-template-columns: 1fr; }
 }

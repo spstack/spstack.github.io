@@ -1,22 +1,19 @@
 ---
+title: "Space Invaders Game Console"
+updated: "Aug 2013"
 ---
 
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="../main.css"/>
-    <link rel="stylesheet" type="text/css" href="../projects.css"/>
-    <link rel="stylesheet" type="text/css" href="project_pages.css"/>
-
-    <title>Scott Stack's Website</title>
-
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html title=page.title css="/projects/project_pages.css" %}
 
 <body>
   <div id="page">
   {% include header.html %}
 
-	<div class="main_content">
+	<main class="main_content project">
 	<h1 id="project_title">Space Invaders Game Console</h1>
+    <p id="project_date">Last updated {{ page.updated }}</p>
 	
 	<table>
 	  <tr>
@@ -59,13 +56,9 @@
 	  
 	  
 	</table>
-      </div>
+      </main>
 
-      <!--footer      -->
-      <div id="footer">
-	Site written and designed by Scott Stack &nbsp &nbsp &nbsp &nbsp |
-	&nbsp &nbsp &nbsp &nbsp Last updated 08/23/2013
-      </div>
-
-  </body>
+  {% include footer.html %}
+  </div>
+</body>
 </html>
