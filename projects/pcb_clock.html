@@ -41,12 +41,12 @@
 
                     <p class="section_title">Clock Features and Overview</p>
                     <p class="section_text">
-                        I came up with the idea for the basic idea for this project by noticing that light shines through some of the PCBs on my desk
-                        that don't have solder mask. I though it would be cool to make a PCB that had some kind of image etched into the metal
+                        I came up with the basic idea for this project by noticing that light shines through some of the PCBs on my desk
+                        that don't have solder mask. I thought it would be cool to make a PCB that had some kind of image etched into the metal
                         and have light shine through it. A clock was something that I thought would look cool but also be useful. 
                         I knew I wanted to have alarm functionality and RGB backlight as basic features for the clock. I didn't want to add 
                         too many more things because it would quickly become a much bigger project than I intended. I also added circuitry
-                        for battery backup to the clock, but didn't end up implementing it in the end as it seemed kind of unecessary. 
+                        for battery backup to the clock, but didn't end up implementing it in the end as it seemed kind of unnecessary. 
                         
                     </p>
 
@@ -58,14 +58,14 @@
                         features or anything like that. Specifically, I used the PIC18F46J50 in part because I had one laying around, but also
                         because it happens to have an integrated real time clock (RTC) module that will keep track of time without any
                         software interaction. For the other parts in the system, here's a short list of some of the main ones:
-                        A full list of components used can be found at in the CSV file at the last link. I'll also attach all of the design
+                        A full list of components used can be found in the CSV file at the last link. I'll also attach all of the design
                         files to this page in case anyone wants to take a look or use them. 
                     </p>
 
                     <p class="section_text">
                     <ul>
                         <li><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/39931b.pdf">PIC18F46J50</a></li>
-                        <li><a href="https://www.sparkfun.com/products/11405">7 segment disply</a></li>
+                        <li><a href="https://www.sparkfun.com/products/11405">7 segment display</a></li>
                         <li><a href="https://www.sparkfun.com/products/540">32.768kHz Crystal</a></li>
                         <li><a href="http://www.ti.com/lit/ds/symlink/tlv62569.pdf">TLV62569 3.3V switching regulator</a></li>
                         <li><a href="./pcb_clock_media/Final_BOM.csv">...Full BOM CSV File Download</a></li>
@@ -98,8 +98,8 @@
                         The board is powered by a 5V input from a micro USB cable. That voltage net is used to drive the RGB LEDs and speaker through load switch FETs. 
                         The 5V VIN also goes to the backup battery charger, and a 3.3V switching buck voltage regulator. That 3.3V output powers the PIC
                         microcontroller. The power schematic sheet also includes a circuit that I designed to switch the supply voltage from the 5V 
-                        input to a backup battery. The circuit uses a comparitor to compare the 5V input to the 3.7V LiPo battery voltage. If the 5V input 
-                        drops below the Vbatt voltage, the comparitor switches on a P channel FET that connects the battery voltage to the 3.3V output.
+                        input to a backup battery. The circuit uses a comparator to compare the 5V input to the 3.7V LiPo battery voltage. If the 5V input 
+                        drops below the Vbatt voltage, the comparator switches on a P channel FET that connects the battery voltage to the 3.3V output.
                         This means that only the PIC microcontroller will be powered while running from the battery. The PIC would also get a notification
                         that it is running on battery power by checking the POWER_GOOD signal from the 3.3V regulator. This allows the PIC to stop trying to
                         power the RGB LEDs and speaker, and simply enter sleep and maintain the time.
@@ -117,7 +117,7 @@
                     </p>
 
                     <p class="section_text"> 
-                        Once the schematic was done, I moved on to layout of the PCB. The image below show the completed final layout. 
+                        Once the schematic was done, I moved on to layout of the PCB. The image below shows the completed final layout. 
                     </p>
 
                     <table align="center">
@@ -135,7 +135,7 @@
                         wanted to make the PCB one sided. There are still a lot of wires that had to be hand soldered to the back of the 
                         PCB to make it work, but a good amount of the design is still on the front side. For the mountain scene, I just googled
                         for a black and white mountain scene and this one is the one I liked best. Diptrace has a cool feature where if you add 
-                        and image to the design, it automatically makes black metal and white negative space.
+                        an image to the design, it automatically makes black metal and white negative space.
                     </p>
 
 
@@ -143,7 +143,7 @@
 
                     <p class="section_text">
                         The next step in the process was to actually make the printed circuit board. I found a couple videos on youtube
-                        the showed how to do this namely this one: <a href="https://www.youtube.com/watch?v=tWnfnt2rNO0&t=400s">Circuit Skills: Circuit Board Etching</a>
+                        that showed how to do this namely this one: <a href="https://www.youtube.com/watch?v=tWnfnt2rNO0&t=400s">Circuit Skills: Circuit Board Etching</a>
                         The method that I used which is outlined in that video is the photoresist method, and I actually bought a kit to do it. 
                         The kit can be found here: 
                         <a href="https://www.amazon.com/MG-Chemicals-416-K-Piece-Photofabrication/dp/B005T8VOBM/">MG Chemicals 416-K 9 Piece Photofabrication Kit</a>
@@ -235,7 +235,7 @@
                     <p class="section_text">
                         Now for the really tedious part. This ended up being a lot more time and work than I thought it was going to be.
                         That could probably be said about most things though... The code for the PIC was written in C. Each functional area
-                        had it's own file for example, the RGB LEDs, speaker, clock, and seven segment display, all had their own files.
+                        had its own file for example, the RGB LEDs, speaker, clock, and seven segment display, all had their own files.
                         The code is organized so that the main loop just calls a task function for each of the functional areas. That task
                         checks if it has something to do, then executes it and jumps back to the main loop. Much of the functionality of the
                         clock requires waiting for specific time intervals before an action is taken. For example, the seven segment display has
@@ -244,12 +244,12 @@
                         this ability, all of them use a common 'System Clock' to measure how much time has elapsed since the last event. That way
                         each function simply needs to mark the system tick timestamp where it started and subsequently check the current timestamp 
                         to see how much time has elapsed. The system clock measures ticks in 1ms increments and is implemented with a hardware timer.
-                        The benefit to doing it this way is that a the processor can go service other tasks while the current task is waiting for 
+                        The benefit to doing it this way is that the processor can go service other tasks while the current task is waiting for 
                         something. 
                     </p>
                     <p class="section_text">
                         The other (maybe) interesting part about the code is the implementation of the speaker alarm tone.
-                        For this, I found someones code online that converts a wav file into a C array of PCM values here: 
+                        For this, I found someone's code online that converts a wav file into a C array of PCM values here: 
                         <a href="http://ccgi.cjseymour.plus.com/wavtocode/wavtocode.htm">Wav to C Converter</a> (thanks CJ!).
                         So I had the option to use any audio file as the alarm tone once I wrote the PWM code. To actually
                         get sound out of a speaker you need  digital to analog converter to convert the digital audio sample values into
@@ -276,8 +276,8 @@
                         bit before. I'm not sure it's really the best for 3d printing, but hey...it works. This was definitely a "learn as
                         you go" kind of process. I have pretty much no CAD experience and this took WAAAYYYYY longer than it should have. 
                         The design itself is really just a hollow box with an angled back side. I made sure to include the holes for all of
-                        the buttoms, speaker, and mounting holes so I didn't have to drill into it too much. I also decided to have the labels
-                        for each of the buttons incorporated into the printed model. I though it would look a lot more professional than me writing the
+                        the buttons, speaker, and mounting holes so I didn't have to drill into it too much. I also decided to have the labels
+                        for each of the buttons incorporated into the printed model. I thought it would look a lot more professional than me writing the
                         labels with a sharpie. Here are some images of the final CAD model.
                     </p>
 
@@ -332,7 +332,7 @@
                         Wooo finally done! Once everything was ready, I hot-glued all of the wires and components on the back of the
                         PCB for strain relief. I Also hot-glued the speaker, USB plug, and Snooze button into place. The +/-/SET buttons are all panel mount
                         so they simply get screwed into place. The PCB is held on by some plastic standoffs that are glued into the mounting holes. I cut
-                        a piece of acrylic glass to go over the front of the clock because ESD would make it restart everytime I touched it, and I'm 100%
+                        a piece of acrylic glass to go over the front of the clock because ESD would make it restart every time I touched it, and I'm 100%
                         sure that I'd break it eventually by shocking it. Anyway here's the final thing!!!
                     </p>
 

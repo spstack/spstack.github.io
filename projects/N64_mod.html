@@ -16,14 +16,14 @@
   {% include header.html %}
 
 	<div class="main_content">
-	<h1 id="project_title">Nintento 64 LED Mod</h1>
+	<h1 id="project_title">Nintendo 64 LED Mod</h1>
 	
 	<table>
 	  <tr>
 	    <td class="text_td">
 	      <p class="section_title">Overview</p>
-		  <p class="section_text"> I decided to make my N64 a bit to make it more interesting by adding a bunch of LEDs to it. I put 4 different colored LEDs in the controller ports 
-		  which gives kind of a cool effect. The more interesting part of this mod in the RGB LEDs that I added to the side and top 'vents'. The RGB LEDs are controlled by an onboard
+		  <p class="section_text"> I decided to make my N64 a bit more interesting by adding a bunch of LEDs to it. I put 4 different colored LEDs in the controller ports 
+		  which gives kind of a cool effect. The more interesting part of this mod is the RGB LEDs that I added to the side and top 'vents'. The RGB LEDs are controlled by an onboard
 		  microcontroller that will change the color of the LEDs when you press the reset button. In order to use the reset button, I cut the trace that actually resets the N64, so it
 		  no longer actually functions as a reset button (nobody really uses it anyway). 
 		  
@@ -36,7 +36,7 @@
 	      <p class="section_title">Details</p>
 		  <p class="section_text"> I used a PIC microcontroller to control the RGB LEDs colors. The LEDs in the controller ports were just wired in series to the 12V output from the power switch.
 		  The 3.3V output from the power switch was routed right to the PIC which directly drives the RGB LEDs. In order to use the reset button on the N64, I had to cut the trace that actually
-		  led to the reset line for the N64. That way I could wire the output from the reset button directly to the PIC and use it to control the cycling of RBG LED colors. Pressing the reset button
+		  led to the reset line for the N64. That way I could wire the output from the reset button directly to the PIC and use it to control the cycling of RGB LED colors. Pressing the reset button
 		  will cycle through all of the possible colors for the RGB LEDs. I didn't implement brightness control with PWM, so there are only 8 color possibilities. There are an additional 2 options when
 		  you press the button past those first 8 which will randomly cycle through the color options every 1 second or .25 seconds. 	  
 

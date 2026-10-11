@@ -25,7 +25,7 @@
 	      <p class="section_title">Overview</p>
 		  <p class="section_text">I love the idea of home automation, and I wanted to make a system that was easily extensible, and able to potentially interact with lots
 			of different things around the house. My first attempt at some simple home automation did a couple things, but it felt a bit hacked together. This time around,
-			I actually made it a little more modular, and created custom PCBs and enclosures for the devices. It still uses a rasbery pi as the main control hub in conjunction with a 
+			I actually made it a little more modular, and created custom PCBs and enclosures for the devices. It still uses a Raspberry Pi as the main control hub in conjunction with a 
 			PIC like last time. The main difference here, is I've set up a django powered website to host the control site and keep a database of events and statuses for
 			different peripherals. The other main difference is the addition of a zigbee network. I created custom 'remote modules' that connect to the control hub through
 			the zigbee protocol. This was cheaper and lower power than using something like wifi to communicate back to the control hub. Right now the remote modules have rechargeable batteries
@@ -35,7 +35,7 @@
           
 		<p class="section_title">Hardware</p>
 		<p class="section_text">
-		The base station consists of a rasberry pi 2 and a second custom PCB that includes a PIC microcontroller, a zigbee radio module, a generic 434MHz radio module, a blueooth module, and
+		The base station consists of a Raspberry Pi 2 and a second custom PCB that includes a PIC microcontroller, a zigbee radio module, a generic 434MHz radio module, a Bluetooth module, and
 		a temperature sensor. All of this sits inside of a basic black project box. 
 		<br/>
 		<br/>
@@ -83,13 +83,13 @@
 		<p class="section_text">
 		The 2 main features of the remote modules are a <a href="https://www.digikey.com/product-detail/en/honeywell-sensing-and-productivity-solutions/HIH6130-021-001/480-3651-1-ND/2704704"/>
 			temperature/humidity sensor</a> and a FET that can switch some kind of load remotely. I plan to use this FET to switch an IR LED which will control the TVs in my apartment. 
-		The remote modules can be powered by a rechargable LiIon battery or a micro USB connection. When in battery mode, the USB port will charge the battery using an integrated charge
+		The remote modules can be powered by a rechargeable Li-ion battery or a micro USB connection. When in battery mode, the USB port will charge the battery using an integrated charge
 		controller. The battery life is pretty good since the PIC and XBee spend most of their time in sleep mode. They usually last about a month before needing to be recharged. The schematics
 		and board file for the remote module are also attached below.
 
 		<p class="section_title">Software</p>
 		<p class="section_text">
-		Just like on the little internet controlled robot, the rasberry pi 2 in the control hub is running an ARM version of Arch Linux. Instead of just hosting a normal website on it like last time, I 
+		Just like on the little internet controlled robot, the Raspberry Pi 2 in the control hub is running an ARM version of Arch Linux. Instead of just hosting a normal website on it like last time, I 
 		decided to use a <a href="https://www.djangoproject.com/">django</a> site that includes an actual database. The main reason was that I wanted to maintain a bunch of information
 		in a database (like temperature history for example), and Django was a great way to incorporate that and a control website into one. In with the Django code for the database and website,
 		I have the code that coordinates communication with the PIC on the other PCB and by extension, the remote modules. It can initiate a command to the other board (like turning on lights), or

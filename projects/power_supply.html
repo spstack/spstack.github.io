@@ -117,13 +117,13 @@
                        <p class="section_text">
                            While the supply can technically go up to 27V and supply 3A, it can't do both at the same time. It's actually limited by the power rating of the transformer which is 48VA (max 2.4A @20V RMS output). So,
                            I had to add a power protection circuit to prevent too much power from being consumed by the output. The power protection circuit consists of 2 opamps, one configured 
-                           as a differential amplifier, and another configured as a comparitor. All of the current consumed by the supply travels through a current sense resistor
+                           as a differential amplifier, and another configured as a comparator. All of the current consumed by the supply travels through a current sense resistor
                            which generates a small voltage across it proportional to the current being drawn. The differential amplifier takes that voltage and amplifies it by a factor
                            of 4. The output of this amplifier is a voltage equal to the current draw in amps (V_diff * 4 * 0.25Ohms). This voltage is compared with a reference voltage
-                           of 2.2V (2.2A), and if the current draw is more than that, the comparitor will turn on a BJT transistor that will set the output voltage to 0.
+                           of 2.2V (2.2A), and if the current draw is more than that, the comparator will turn on a BJT transistor that will set the output voltage to 0.
                        </p>
                        <p class="section_text">
-                            Last but not least, the thing has to look cool, so I added some LEDs whos brightness change based on the output voltage and current. The brightness of
+                            Last but not least, the thing has to look cool, so I added some LEDs whose brightness change based on the output voltage and current. The brightness of
                             two blue LEDs changes based on the output voltage, and the brightness of two red LEDs changes based on the output current. With the clear plastic
                             case it ends up looking pretty sweet.
                         </p>
@@ -243,7 +243,7 @@
 
 
                         <p class="section_title">Finished Product!</p>
-                        <p class="section_text">Here's some pictures of the final thing!</p>
+                        <p class="section_text">Here are some pictures of the final thing!</p>
 
                         <table>
                             <tr>
