@@ -1,5 +1,14 @@
 # Projects shown on the home page and projects page, newest first.
 # Add a new project by adding an entry at the top.
+# image_position is optional; it sets the crop focus, e.g. "50% 85%" keeps the lower part of a tall photo.
+
+- title: "Instrument Panel Lamp"
+  url: projects/panel_lamp.html
+  image: projects/panel_lamp_media/panel-lamp1.jpg
+  image_position: 50% 85%   # optional: which part of the photo to keep when the card crops it
+  tags: [PCB design, KiCad, Arduino, Upcycling]
+  description: >-
+    I got this old instrument panel out of a printing press that was being scrapped and turned it into a lamp. It uses all of the original knobs and switches: the main toggle switch turns it on, an autotransformer knob dims the bulb, and the rest control Arduino-driven backlighting LEDs.
 
 - title: "Evolution Simulation Canvas"
   url: projects/evolution_sim.html
@@ -11,7 +20,7 @@
 - title: "LightLink Remote Outlet"
   url: projects/remote_outlet.html
   image: projects/remote_outlet_media/lightlink_completed_enclosures.jpg
-  tags: [PCB design, PIC, RF, KiCad]
+  tags: [PCB design, PIC, 915MHz radio, KiCad]
   description: >-
     This is a little device that essentially allows you to change the location of a switched power outlet. The idea is you plug one device into the switched outlet then another into the outlet you want to control, and the device's power states are linked over a wireless connection. I made this mainly because the locations of the switched outlets in my current apartment make no sense, and I still like to be able to use the light switches to control lamps.
 
@@ -32,7 +41,7 @@
 - title: "Night Vision Goggles"
   url: projects/night_vision.html
   image: projects/night_vision_media/nv_goggles.jpg
-  tags: [Infrared]
+  tags: [IR LEDs, Phone hack]
   description: >-
     I created a set of night vision goggles using google cardboard, an old phone, and some bright IR LEDs.
 
@@ -60,7 +69,7 @@
 - title: "Internet Controlled Robot"
   url: projects/internet_robot.html
   image: projects/internet_robot_media/robot_0.jpg
-  tags: [Raspberry Pi, PIC, Android]
+  tags: [Raspberry Pi, PIC, Android, Websockets]
   description: >-
     I made a small robot that is capable of being controlled through the internet via an android app or web browser. The robot provides a live POV video feed to the user who can drive the robot in real time. The robot uses an onboard Raspberry Pi to receive control commands and serve a video stream from the attached camera. This project was really a smaller and simpler version of the 'Minotaur' robot I worked on for my senior project. I've also constructed a 'base' for the robot which uses induction coils to charge the robot's USB battery pack while it is on the base. It can sit on this base while not in use which allows it to stay powered for long periods.
 

@@ -1,6 +1,6 @@
 <article class="project_card{% if include.featured %} featured{% endif %}">
     <a class="card_image" href="/{{ include.project.url }}" tabindex="-1" aria-hidden="true">
-        <img src="/{{ include.project.image }}" alt="" loading="lazy"/>
+        <img src="/{{ include.project.image }}" alt="" loading="lazy"{% if include.project.image_position %} style="object-position: {{ include.project.image_position }}"{% endif %}/>
     </a>
     <div class="card_body">
         <h3 class="project_title"><a href="/{{ include.project.url }}">{{ include.project.title }}</a></h3>

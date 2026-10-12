@@ -1,0 +1,141 @@
+---
+title: "Instrument Panel Lamp"
+updated: "Oct 2026"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html title=page.title css="/projects/project_pages.css" %}
+
+<body>
+  <div id="page">
+  {% include header.html %}
+
+    <main class="main_content project">
+        <h1 id="project_title">Instrument Panel Lamp</h1>
+        <p id="project_date">Last updated {{ page.updated }}</p>
+
+        <table>
+            <tr>
+                <td class="text_td">
+                    <p class="section_title">Overview</p>
+                    <p class="section_text">
+                        I got this old instrument panel out of a printing press that was (unfortunately) being scrapped.
+                        Decided to make it into a cool looking lamp so it's not only a neat display, but also somewhat functional.
+                    </p>
+                    <p class="section_text">
+                        I'm honestly not sure what the panel controlled on the old printing press, but it's pretty cool looking and
+                        has some super satisfying switches to press.
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="panel_lamp_media/panel-lamp2.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-lamp2.jpg" alt="The finished lamp with the shade on">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-lamp3.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-lamp3.jpg" alt="Side view of the panel">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-lamp6.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-lamp6.jpg" alt="Close up of the front panel controls">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="section_title">Functionality</p>
+                    <p class="section_text">
+                        It uses all of the original knobs and buttons to control various aspects of the lamp.
+                    </p>
+                    <p class="section_text">
+                        The toggle switch in the center is the main on/off switch for the whole thing. It's wired through one
+                        of the fuses on the front panel as well.
+                        The left knob controls the brightness of the main lamp bulb. It's an autotransformer, so it can just
+                        be directly hooked up to the bulb to control brightness.
+                        The other switches/knobs are tied to an Arduino that controls back-lighting LEDs.
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <video class="section_image portrait_video" controls preload="metadata" playsinline>
+                                    <source src="panel_lamp_media/panel-lamp-demo.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-lamp4.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-lamp4.jpg" alt="Inside the panel: the autotransformer and wiring">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-lamp5.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-lamp5.jpg" alt="Another view of the wiring behind the panel">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="section_title">Schematic</p>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="panel_lamp_media/panel-sch1.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-sch1.jpg" alt="Schematic page 1">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-sch2.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-sch2.jpg" alt="Schematic page 2">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="panel_lamp_media/panel-sch3.jpg">
+                                    <img class="section_image" src="panel_lamp_media/panel-sch3.jpg" alt="Schematic page 3">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="section_title">PCB Layout</p>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="panel_lamp_media/panel-pcb.jpg">
+                                    <img class="section_image wide_image" src="panel_lamp_media/panel-pcb.jpg" alt="PCB layout">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <p class="section_title">Build Pictures</p>
+                    <table class="img_table">
+                        <tr>
+                            <td class="img_td"><a href="panel_lamp_media/panel_lamp_cad1.png" class="img_thumb"><img src="panel_lamp_media/thumbs/panel_lamp_cad1_thumb.jpg" class="img_thumb" alt="CAD model of the lamp"/></a></td>
+                            <td class="img_td"><a href="panel_lamp_media/panel-build7.jpg" class="img_thumb"><img src="panel_lamp_media/thumbs/panel-build7_thumb.jpg" class="img_thumb" alt="Build photo"/></a></td>
+                            <td class="img_td"><a href="panel_lamp_media/panel-build13.jpg" class="img_thumb"><img src="panel_lamp_media/thumbs/panel-build13_thumb.jpg" class="img_thumb" alt="Build photo"/></a></td>
+                            <td class="img_td"><a href="panel_lamp_media/panel-build14.jpg" class="img_thumb"><img src="panel_lamp_media/thumbs/panel-build14_thumb.jpg" class="img_thumb" alt="Build photo"/></a></td>
+                            <td class="img_td"><a href="panel_lamp_media/panel-build15.jpg" class="img_thumb"><img src="panel_lamp_media/thumbs/panel-build15_thumb.jpg" class="img_thumb" alt="Build photo"/></a></td>
+                            <td class="img_td"><a href="panel_lamp_media/panel-build17.jpg" class="img_thumb"><img src="panel_lamp_media/thumbs/panel-build17_thumb.jpg" class="img_thumb" alt="Build photo"/></a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </main>
+
+  {% include footer.html %}
+  </div>
+</body>
+
+</html>

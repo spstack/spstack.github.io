@@ -112,6 +112,12 @@
 
 .project video.section_image { aspect-ratio: auto; background: #000; }
 
+/* phone videos shot in portrait: keep them from getting too tall */
+.project video.portrait_video { max-width: 400px; aspect-ratio: 9 / 16; object-fit: cover; }
+
+/* wide images (like a long PCB layout) can use the full width */
+.project img.section_image.wide_image { max-width: 100%; }
+
 /* ---- "More pictures" thumbnail strip ---- */
 .project .img_table tr { gap: 12px; }
 
